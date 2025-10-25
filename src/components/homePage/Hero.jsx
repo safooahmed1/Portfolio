@@ -80,7 +80,7 @@ const zoomIn = {
       {/* 1*/}
       <div className="flex flex-col gap-6 centered w-full">
         <motion.h1 
-          className="w-full font-semibold text-4xl lg:text-5xl leading-[65px]"
+          className="w-full font-semibold text-4xl lg:text-5xl md:leading-[65px]"
           variants={slideFromLeft}
         >
           Safoo is a
@@ -89,7 +89,7 @@ const zoomIn = {
         </motion.h1>
 
         <motion.p 
-          className="text-[#ABB2BF] text-[16px] w-6/12"
+          className="text-[#ABB2BF] text-[16px] md:w-6/12"
           variants={slideFromLeft}
         >
           He crafts responsive websites where technologies meet creativity
