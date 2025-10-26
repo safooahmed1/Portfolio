@@ -1,5 +1,6 @@
 import Hero from "../components/homePage/Hero";
 import Quote from "../components/homePage/Quote";
+import ShortPro from "../components/workPage/ShortPro";
 
 export default function HomePage() {
   return (
@@ -7,6 +8,7 @@ export default function HomePage() {
       <div className="h-[5000px] flex flex-col gap-10">
         <Hero />
         <Quote />
+        <ShortPro/>
       </div>
     </>
   );

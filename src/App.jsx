@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
+import WorkPage from "./pages/WorkPage";
 import Header from "./components/headre/Header";
 import Layout from "./components/layout/Layout";
 
@@ -13,7 +14,7 @@ export default function App() {
           <Routes>
             <Route path="/">
               <Route index element={<HomePage />} />
-              <Route path="work" element_={<h1>my work</h1>} />
+              <Route path="work" element_={<WorkPage />} />
               <Route path="aboutME/" element_={<h1>my work</h1>}>
                 {/* <Route path="project:/" */}
               </Route>
