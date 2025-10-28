@@ -1,6 +1,7 @@
 import { useAnimationStore } from "../store/indexAnimation";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { motion } from "motion/react";
 
 export default function HeaderTittel({tittle}) {
   const { containerVariants, zoomIn } = useAnimationStore();
