@@ -1,8 +1,8 @@
 import { motion } from "motion/react";
-import { useAnimationStore } from "../../store/indexAnimation";
+import { useAnimationStore } from "../../../store/indexAnimation";
 import { Link } from "react-router-dom";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
-import { useProjcts } from "../../store";
+import { useProjcts } from "../../../store";
 import Box from "./Box";
 
 export default function BoxShortPro() {
@@ -17,7 +17,7 @@ export default function BoxShortPro() {
         animate="visible"
       >
         {shortProjcts.map((el, index) => {
-          return <Box el={el} index={index} />;
+          return <Box el={el} key={index} />;
         })}
       </motion.div>
     </>

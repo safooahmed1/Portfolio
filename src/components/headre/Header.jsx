@@ -22,7 +22,7 @@ export default function Header() {
 
   return (
     <div className="relative">
-      <div className="lg:fixed lg:top-0 lg:m-auto lg:container lg:bg-[#282C33] lg:pb-4 lg:z-10 ">
+      <div className="lg:fixed lg:top-0 lg:m-auto lg:container lg:bg-[#282C33] lg:pb-4 lg:z-30 ">
         {/* navbar */}
         <NavbarXl links={links} />
         <NavbarSm links={links} />

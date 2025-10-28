@@ -40,3 +40,17 @@ export const useProjcts = create(() => ({
     },
   ],
 }));
+
+export const usdLoader = create((set) => ({
+  index: false,
+  setLoader: {},
+}));
+
+export const useSkills = create(() => ({
+  skills: [
+    { type: "Languages", skill: [] },
+    { type: "Tools", skill: [] },
+    { type: "Frameworks", skill: [] },
+    { type: "Other", skill: [] },
+  ],
+}));

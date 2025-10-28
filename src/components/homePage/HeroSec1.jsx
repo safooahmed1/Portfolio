@@ -42,7 +42,7 @@ export default function HeroSec1() {
 
           <motion.div variants={slideFromLeft}>
             <motion.button
-              className="relative w-fit px-4 py-2 border-[1px] font-medium border-[#C778DD] overflow-hidden"
+              className="relative w-fit px-4 py-2 border font-medium border-[#C778DD] overflow-hidden"
               whileHover="hover"
               initial="initial"
             >
@@ -89,7 +89,7 @@ export default function HeroSec1() {
 
           {/* card */}
           <motion.div
-            className="border-[1px] border-[#ABB2BF] flex items-center gap-2.5 absolute w-full bottom-0 md:bottom-5 bg-[#282C33] p-2"
+            className="border border-[#ABB2BF] flex items-center gap-2.5 absolute w-full bottom-0 md:bottom-5 bg-[#282C33] p-2"
             variants={slideFromBottom}
           >
             <div className="w-4 h-4 bg-[#C778DD]"></div>

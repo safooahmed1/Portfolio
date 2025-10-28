@@ -1,9 +1,8 @@
-import { motion } from "motion/react";
-import { useAnimationStore } from "../../store/indexAnimation";
+import { useAnimationStore } from "../store/indexAnimation";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
-export default function HeaderSortPro() {
+export default function HeaderTittel({tittle}) {
   const { containerVariants, zoomIn } = useAnimationStore();
   return (
     <>
@@ -13,7 +12,7 @@ export default function HeaderSortPro() {
         initial="hidden"
         animate="visible"
       >
-        <motion.div className="flex justify-between"
+        <motion.div className="flex justify-between items-center"
         variants={zoomIn}
         >
           <div className="flex items-center gap-4">
@@ -22,10 +21,10 @@ export default function HeaderSortPro() {
                 <span className="text-[#C778DD] text-[32px] font-medium">
                   #
                 </span>
-                projects
+                {tittle}
               </Link>
             </h2>
-            <span className="bg-[#C778DD] h-[1px] w-[800px] "></span>
+            <span className="bg-[#C778DD] h-px w-[800px] "></span>
           </div>
           <h3>
             <Link
