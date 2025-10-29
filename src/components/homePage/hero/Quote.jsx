@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
-import coma from "../../assets/coma.png";
-import { useAnimationStore } from "../../store/indexAnimation";
+import coma from "../../../assets/coma.png";
+import { useAnimationStore } from "../../../store/indexAnimation";
 
 export default function Quote() {
   const { containerVariants, zoomIn } = useAnimationStore();
@@ -10,15 +10,10 @@ export default function Quote() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      >
-      <motion.div
-        className="flex justify-center mt-20 "
-        variants={zoomIn}
-      >
+    >
+      <motion.div className="flex justify-center mt-20 " variants={zoomIn}>
         <div className="relative flex flex-col items-end">
-          <div
-            className="border border-[#ABB2BF] flex items-center justify-center relative w-fit p-6"
-          >
+          <div className="border border-[#ABB2BF] flex items-center justify-center relative w-fit p-6">
             <img
               src={coma}
               className="absolute left-8 -top-5 p-2 bg-[#282C33]"
