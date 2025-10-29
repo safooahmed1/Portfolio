@@ -3,7 +3,7 @@ import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 
-export default function HeaderTittel({tittle}) {
+export default function HeaderTittel({ tittle }) {
   const { containerVariants, zoomIn } = useAnimationStore();
   return (
     <>
@@ -13,10 +13,11 @@ export default function HeaderTittel({tittle}) {
         initial="hidden"
         animate="visible"
       >
-        <motion.div className="flex justify-between items-center"
-        variants={zoomIn}
+        <motion.div
+          className="flex justify-between items-center"
+          variants={zoomIn}
         >
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 w-8/12">
             <h2 className="text-[32px] font-medium">
               <Link to={"/work"}>
                 <span className="text-[#C778DD] text-[32px] font-medium">
@@ -25,9 +26,9 @@ export default function HeaderTittel({tittle}) {
                 {tittle}
               </Link>
             </h2>
-            <span className="bg-[#C778DD] h-px w-[800px] "></span>
+            <span className="bg-[#C778DD] h-px w-full  "></span>
           </div>
-          <h3>
+          <h3 className="">
             <Link
               to={"/work"}
               className="font-medium text-[16px] flex items-center gap-3 hover:text-[#C778DD]"

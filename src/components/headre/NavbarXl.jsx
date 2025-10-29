@@ -10,9 +10,9 @@ export default function NavbarXl({ links }) {
       <div className="w-full bg-[#282C33] text-white hidden md:flex flex-row justify-between md:pt-8">
         <div className="flex gap-2 h-5 items-center ">
           <img src={logoF} alt="" className="w-4 h-4  " />
-          <h1 className="font-bold text-[16px]  ">SAFOO</h1>
+          <h1 className="font-bold text-[16px]">SAFOO</h1>
         </div>
-        <nav className="md:flex bg-[#282C33] hidden gap-8   ">
+        <nav className="md:flex bg-[#282C33] hidden gap-8">
           {links.map((el, index) => {
             const isActive = location.pathname === el.path;
             return (
@@ -21,7 +21,7 @@ export default function NavbarXl({ links }) {
                 to={el.path}
                 className={
                   isActive
-                    ? "font-medium text-[#fff]"
+                    ? "font-medium text-whit"
                     : "font-normal text-[#ABB2BF] hover:text-white"
                 }
               >

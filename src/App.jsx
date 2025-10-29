@@ -7,7 +7,7 @@ import Layout from "./components/layout/Layout";
 export default function App() {
   return (
     <div className="bg-[#282C33] text-white">
-      <div className="container mx-auto flex flex-col px-4 md:px-0 overflow-hidden">
+      <div className="container mx-auto flex flex-col px-4 md:px-0">
         <BrowserRouter>
           <Header />
           <Layout />
