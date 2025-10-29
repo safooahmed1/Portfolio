@@ -9,7 +9,7 @@ export default function AboutMeContant() {
     <>
       <div className="flex flex-col md:flex-row items-center max-sm:gap-15">
         {/* 1 */}
-        <div className="flex flex-col gap-8 text-xl text-[#ABB2BF] md:w-5/12">
+        <div className="flex flex-col gap-8 text-xl font-medium text-[#ABB2BF] leading-[26px] md:w-5/12">
           <p>Hello, i’m Elias!</p>
           <p>
             I’m a self-taught front-end developer based in Kyiv, Ukraine. I can
