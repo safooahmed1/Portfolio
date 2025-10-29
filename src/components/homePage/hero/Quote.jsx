@@ -30,7 +30,6 @@ export default function Quote() {
             <p className="text-[24px] font-medium text-white ">- Dr. Who</p>
           </div>
         </div>
-        <div className=" right-0"></div>
       </motion.div>
     </motion.div>
   );

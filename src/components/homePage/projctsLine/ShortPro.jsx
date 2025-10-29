@@ -1,5 +1,5 @@
 import BoxShortPro from "./BoxShortPro";
-import HeaderTittel from "../../HeaderTittel";
+import HeaderTittel from "../../krkba/HeaderTittel";
 
 export default function ShortPro() {
   let tittle = "projects";

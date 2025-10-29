@@ -14,11 +14,11 @@ export default function App() {
           <Routes>
             <Route path="/">
               <Route index element={<HomePage />} />
-              <Route path="work" element_={<WorkPage />} />
-              <Route path="aboutME/" element_={<h1>my work</h1>}>
+              <Route path="projects" element={<WorkPage />} />
+              <Route path="about-me" element={<h1>my work</h1>}>
                 {/* <Route path="project:/" */}
               </Route>
-              <Route path="contacts" element_={<h1>my contacts</h1>} />
+              <Route path="contacts" element={<h1>my contacts</h1>} />
             </Route>
           </Routes>
         </BrowserRouter>

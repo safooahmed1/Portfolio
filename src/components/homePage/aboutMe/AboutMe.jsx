@@ -1,4 +1,4 @@
-import HeaderTittel from "../../HeaderTittel";
+import HeaderTittel from "../../krkba/HeaderTittel";
 import AboutMeContant from "./AboutMeContant";
 
 export default function AboutMe() {

@@ -1,9 +1,7 @@
 export default function WorkPage() {
   return (
     <>
-    <div className="">
-      
-    </div>
+      <div className=""></div>
     </>
   );
 }

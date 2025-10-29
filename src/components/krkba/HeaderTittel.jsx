@@ -1,14 +1,13 @@
-import { useAnimationStore } from "../store/indexAnimation";
-import { HiOutlineArrowNarrowRight } from "react-icons/hi";
+import { useAnimationStore } from "../../store/indexAnimation";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
+import ButtonViewAll from "./ButtonViewAll";
 
 export default function HeaderTittel({ tittle }) {
   const { containerVariants, zoomIn } = useAnimationStore();
   return (
     <>
       <motion.div
-        className=""
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -26,16 +25,11 @@ export default function HeaderTittel({ tittle }) {
                 {tittle}
               </Link>
             </h2>
-            <span className="bg-[#C778DD] h-px w-full  "></span>
+            <span className="bg-[#C778DD] h-px w-full"></span>
           </div>
-          <h3 className="">
-            <Link
-              to={"/work"}
-              className="font-medium text-[16px] flex items-center gap-3 hover:text-[#C778DD]"
-            >
-              View all <HiOutlineArrowNarrowRight />
-            </Link>
-          </h3>
+          {tittle == "skills" ? null : (
+            <ButtonViewAll tittle={tittle} />
+          )}
         </motion.div>
       </motion.div>
     </>

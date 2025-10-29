@@ -15,8 +15,8 @@ import { BiSolidContact } from "react-icons/bi";
 export default function Header() {
   const links = [
     { name: "Home", path: "/", icon: <MdHome /> },
-    { name: "Works", path: "/work", icon: <FaNetworkWired /> },
-    { name: "About-Me", path: "/aboutME/", icon: <FaUser /> },
+    { name: "Works", path: "/projects", icon: <FaNetworkWired /> },
+    { name: "About-Me", path: "/about-me", icon: <FaUser /> },
     { name: "contacts", path: "/contacts", icon: <BiSolidContact /> },
   ];
 
