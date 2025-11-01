@@ -17,7 +17,7 @@ export default function HeaderTittel({ tittle }) {
           variants={zoomIn}
         >
           <div className="flex items-center gap-4 w-8/12">
-            <h2 className="text-[32px] font-medium">
+            <h2 className="text-[32px] font-medium whitespace-nowrap ">
               <Link to={"/work"}>
                 <span className="text-[#C778DD] text-[32px] font-medium">
                   #
