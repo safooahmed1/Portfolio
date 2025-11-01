@@ -7,7 +7,7 @@ export default function TopFooter() {
   return (
     <>
       <div className="">
-        <div className="flex justify-between ">
+        <div className="flex flex-col md:flex-row gap-5  justify-between ">
           <div className="flex flex-col gap-3">
             <div className="flex gap-5">
               {/* logo */}
