@@ -1,15 +1,15 @@
-import { motion } from "motion/react";
 import coma from "../../../assets/coma.png";
 import { useAnimationStore } from "../../../store/indexAnimation";
+import { motion } from "motion/react";
 
 export default function Quote() {
   const { containerVariants, zoomIn } = useAnimationStore();
   return (
     <motion.div
-      className=""
       variants={containerVariants}
+      whileInView="visible"
       initial="hidden"
-      animate="visible"
+      viewport={{ once: true, amount: 0.2 }}
     >
       <motion.div className="flex justify-center mt-20 " variants={zoomIn}>
         <div className="relative flex flex-col items-end">

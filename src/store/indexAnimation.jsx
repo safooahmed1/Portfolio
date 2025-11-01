@@ -84,9 +84,10 @@ export const useAnimationStore = create(() => ({
 // <motion.div
 //    variants={containerVariants}
 //    initial="hidden"
-//    animate="visible"
+//    whileInView="visible"
+//    viewport={{ once: true, amount: 0.2 }}
 // ><motion.div/>
-//
+
 // Variants لاي عناصر جيا من اي حتة
 // <motion.p variants={الانماشن اللي انت عيزه} ><motion.p/>
 
