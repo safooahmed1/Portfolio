@@ -4,7 +4,6 @@ import AboutMe from "../components/homePage/aboutMe/AboutMe";
 import ShortPro from "../components/homePage/projctsLine/ShortPro";
 import Skills from "../components/homePage/skills/Skills";
 import Contacts from "../components/homePage/contacts/Contacts";
-import Footer from "../components/homePage/footer/Footer";
 
 export default function HomePage() {
   return (
@@ -16,7 +15,6 @@ export default function HomePage() {
         <Skills />
         <AboutMe />
         <Contacts />
-        <Footer />
       </div>
     </>
   );

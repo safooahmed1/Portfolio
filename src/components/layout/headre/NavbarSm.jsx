@@ -1,13 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
-import Swap from "./Swap";
 
 export default function NavbarSm({ links }) {
   const location = useLocation();
   return (
     <>
       <div className="">
-        <nav className="md:hidden  bg-[#282C33] dock">
-          {links.map((el, index) => {
+        <nav className="md:hidden bg-[#282C33] dock">
+          {links.map((el) => {
             const isActive = location.pathname === el.path;
             return (
               <Link

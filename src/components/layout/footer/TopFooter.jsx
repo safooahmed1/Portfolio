@@ -1,18 +1,10 @@
 import logo from "../../../assets/logo/logoF.png";
 
-export default function Footer() {
+export default function TopFooter() {
   return (
     <>
-      <div>
-        <div className="flex justify-between w-full py-8 border-t border-[#ABB2BF]">
-          <div className="">
-            <h3>Media</h3>
-            <div>
-              {/* <img src={} alt="" />
-              <img src={} alt="" />
-              <img src={} alt="" /> */}
-            </div>
-          </div>
+      <div className="">
+        <div className="flex">
           <div className="flex flex-col gap-3">
             <div className="flex gap-5">
               {/* logo */}
@@ -26,6 +18,14 @@ export default function Footer() {
               </div>
             </div>
             <p>front-end developer and Mechanical Engineer</p>
+          </div>
+          <div className="">
+            <h3>Media</h3>
+            <div>
+              {/* <img src={} alt="" />
+              <img src={} alt="" />
+              <img src={} alt="" /> */}
+            </div>
           </div>
         </div>
       </div>

@@ -1,11 +1,7 @@
-//img
-import logoF from "../../assets/logo/logoF.png";
 //import local
 import Swap from "./Swap";
 import NavbarXl from "./NavbarXl.jsx";
 import NavbarSm from "./NavbarSm.jsx";
-//zustad
-// import { linkS } from "../../store/index.jsx";
 //react icone
 import { MdHome } from "react-icons/md";
 import { FaNetworkWired } from "react-icons/fa";
@@ -21,8 +17,8 @@ export default function Header() {
   ];
 
   return (
-    <div className="relative">
-      <div className="lg:fixed lg:top-0 lg:m-auto lg:container lg:bg-[#282C33] lg:pb-4 lg:z-30 ">
+    <div className="">
+      <div className="lg:bg-[#282C33] container mx-auto flex px-4 md:px-0 z-30">
         {/* navbar */}
         <NavbarXl links={links} />
         <NavbarSm links={links} />
