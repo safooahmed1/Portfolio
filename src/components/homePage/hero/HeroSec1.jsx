@@ -20,7 +20,7 @@ export default function HeroSec1() {
           className="text-[#ABB2BF] text-[16px] md:w-6/12"
           variants={slideFromLeft}
         >
-          He crafts responsive websites where technologies meet creativity
+          He developer responsive websites where technologies meet evolution
         </motion.p>
 
         <motion.div variants={slideFromLeft}>

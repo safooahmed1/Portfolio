@@ -48,9 +48,15 @@ export const usdLoader = create((set) => ({
 
 export const useSkills = create(() => ({
   skills: [
-    { type: "Languages", skill: [] },
-    { type: "Tools", skill: [] },
-    { type: "Frameworks", skill: [] },
-    { type: "Other", skill: [] },
+    {
+      type: "Languages",
+      skill: ["JavaScript", "Python", "Arbic", "English", "Italy"],
+    },
+    {
+      type: "Tools",
+      skill: ["VSCode", "Fedora", "Linux", "Claude", "Git", "Strapi", "Gnome"],
+    },
+    { type: "Frameworks", skill: ["React", "🖒"] },
+    { type: "Other", skill: ["HTML", "CSS", "Tailwindcss", "React", "Strapi"] },
   ],
 }));
