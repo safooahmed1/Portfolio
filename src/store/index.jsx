@@ -39,6 +39,57 @@ export const useProjcts = create(() => ({
       live: "https://site-compilation.vercel.app/healthyFood",
     },
   ],
+  projcts: [
+    {
+      name: "EWatch",
+      img: pic1,
+      dis: "The eWatch with newest technology",
+      github:
+        "https://github.com/safooahmed1/Site-compilation/blob/main/src/pages/EWatch.jsx",
+      live: "https://site-compilation.vercel.app/eWatch",
+    },
+    {
+      name: "EWatch",
+      img: pic1,
+      dis: "The eWatch with newest technology",
+      github:
+        "https://github.com/safooahmed1/Site-compilation/blob/main/src/pages/EWatch.jsx",
+      live: "https://site-compilation.vercel.app/eWatch",
+    },
+    //
+    {
+      name: "EWatch",
+      img: pic1,
+      dis: "The eWatch with newest technology",
+      github:
+        "https://github.com/safooahmed1/Site-compilation/blob/main/src/pages/EWatch.jsx",
+      live: "https://site-compilation.vercel.app/eWatch",
+    },
+    {
+      name: "Coffee",
+      img: pic2,
+      dis: "What's next in your space travel",
+      github:
+        "https://github.com/safooahmed1/Site-compilation/blob/main/src/pages/Coffee.jsx",
+      live: "https://site-compilation.vercel.app/coffee",
+    },
+    {
+      name: "The Creative Gateway",
+      img: pic3,
+      dis: "Design, Create, Inspire.",
+      github:
+        "https://github.com/safooahmed1/Site-compilation/blob/main/src/pages/TheCreativeGateway.jsx",
+      live: "https://site-compilation.vercel.app/TheCreativeGateway",
+    },
+    {
+      name: "Healthy Food",
+      img: pic5,
+      dis: "A place you eat healthy",
+      github:
+        "https://github.com/safooahmed1/Site-compilation/blob/main/src/pages/HealthyFood.jsx",
+      live: "https://site-compilation.vercel.app/healthyFood",
+    },
+  ],
 }));
 
 export const usdLoader = create((set) => ({

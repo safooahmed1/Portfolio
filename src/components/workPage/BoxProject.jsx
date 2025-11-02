@@ -1,11 +1,11 @@
 import { motion } from "motion/react";
-import { useAnimationStore } from "../../../store/indexAnimation";
-import { useProjcts } from "../../../store";
-import Box from "./Box";
+import Box from "../homePage/projctsLine/Box";
+import { useAnimationStore } from "../../store/indexAnimation";
+import { useProjcts } from "../../store";
 
-export default function BoxShortPro() {
-  const { shortProjcts } = useProjcts();
-  const { containerVariants } = useAnimationStore();
+export default function BoxProject() {
+    const { projcts } = useProjcts();
+    const { containerVariants } = useAnimationStore();
   return (
     <>
       <motion.div
@@ -15,7 +15,7 @@ export default function BoxShortPro() {
         initial="hidden"
         viewport={{ once: true, amount: 0.2 }}
       >
-        {shortProjcts.map((el, index) => {
+        {projcts.map((el, index) => {
           return <Box el={el} key={index} />;
         })}
       </motion.div>

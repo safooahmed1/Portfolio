@@ -9,7 +9,7 @@ export default function Box({ el, index }) {
     <>
       <motion.div
         variants={slideFromBottom}
-        className="border border-[#ABB2BF] flex flex-col pb-4 min-h-[400px]  "
+        className="border border-[#ABB2BF] flex flex-col pb-4 min-h-[400px]"
       >
         <div className="w-full border-b border-[#ABB2BF]">
           <img src={el.img || img} alt="" />
