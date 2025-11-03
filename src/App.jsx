@@ -5,6 +5,7 @@ import LayoutScreen from "./components/LayoutScreen/LayoutScreen";
 import Layout from "./components/layout/Layout";
 import AboutmePage from "./pages/AboutmePage";
 import ContactPage from "./pages/ContactPage";
+import Error404 from "./pages/Error404";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
             </Route>
             <Route path="contacts" element={<ContactPage />} />
           </Route>
+          <Route path="*" element={<Error404 />} />
         </Routes>
       </BrowserRouter>
     </div>
