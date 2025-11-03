@@ -4,6 +4,7 @@ import WorkPage from "./pages/WorkPage";
 import LayoutScreen from "./components/LayoutScreen/LayoutScreen";
 import Layout from "./components/layout/Layout";
 import AboutmePage from "./pages/AboutmePage";
+import ContactPage from "./pages/ContactPage";
 
 export default function App() {
   return (
@@ -17,7 +18,7 @@ export default function App() {
             <Route path="about-me" element={<AboutmePage />}>
               {/* <Route path="project:/" */}
             </Route>
-            <Route path="contacts" element={<h1>my contacts</h1>} />
+            <Route path="contacts" element={<ContactPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

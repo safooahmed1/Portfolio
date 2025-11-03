@@ -16,7 +16,7 @@ export default function MySkills() {
         viewport={{ once: true, amount: 0.2 }}
         className="flex flex-col md:flex-row md:justify-between w-12/12 "
       >
-        <motion.div className="hidden md:flex w-4/12" variants={slideFromLeft}>
+        <motion.div className="hidden lg:flex w-4/12" variants={slideFromLeft}>
           <img src={group} className="w-full" />
         </motion.div>
         <div className="flex gap-4 flex-col justify-end md:flex-row lg:w-5/12">
