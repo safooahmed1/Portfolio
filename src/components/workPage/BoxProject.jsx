@@ -4,8 +4,8 @@ import { useAnimationStore } from "../../store/indexAnimation";
 import { useProjcts } from "../../store";
 
 export default function BoxProject() {
-    const { projcts } = useProjcts();
-    const { containerVariants } = useAnimationStore();
+  const { projcts } = useProjcts();
+  const { containerVariants } = useAnimationStore();
   return (
     <>
       <motion.div
