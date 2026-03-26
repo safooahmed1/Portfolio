@@ -126,7 +126,6 @@ export const useProjcts = create(() => ({
       dis: "A perfect HomePage for e-commerce",
       github:
         "https://github.com/safooahmed1/Site-compilation/blob/main/src/pages/ErorrPage.jsx",
-      live: "https://site-compilation.vercel.app/error",
     },
     {
       name: "Site Compilation",

@@ -26,8 +26,8 @@ export default function Box({ el }) {
           <p className="px-5 text-[#ABB2BF] ">{el.dis}</p>
           {/* button */}
           <div className="flex gap-5 px-5">
-            <Btn name={btn1} to={github} />
-            <Btn name={btn2} to={live} />
+            {github && <Btn name={btn1} to={github} />}
+            {live && <Btn name={btn2} to={live} />}
           </div>
         </div>
       </motion.div>
