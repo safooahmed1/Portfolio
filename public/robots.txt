@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://portfolio-safooahmed1.vercel.app/sitemap.xml
+Sitemap: https://portfolio-gilt-eta-34.vercel.app/sitemap.xml

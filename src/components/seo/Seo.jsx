@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-const siteUrl = "https://portfolio-safooahmed1.vercel.app";
+const siteUrl = "https://portfolio-gilt-eta-34.vercel.app";
 const siteName = "Safoo Portfolio";
 const defaultDescription =
   "Saif Ahmed is a front-end developer and Mechanical Engineer based in Alexandria, Egypt, building responsive websites with React, Tailwind CSS, and modern web tools.";
