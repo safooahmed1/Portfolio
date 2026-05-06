@@ -6,11 +6,13 @@ import Layout from "./components/layout/Layout";
 import AboutmePage from "./pages/AboutmePage";
 import ContactPage from "./pages/ContactPage";
 import Error404 from "./pages/Error404";
+import Seo from "./components/seo/Seo";
 
 export default function App() {
   return (
     <div className="bg-[#282C33] text-white overflow-x-hidden">
       <BrowserRouter>
+        <Seo />
         <LayoutScreen />
         <Routes>
           <Route path="/" element={<Layout />}>
