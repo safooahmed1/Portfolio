@@ -328,11 +328,47 @@ screen
 
 ---
 
+## Task 9 — `a11y: fix the three pre-existing failures found by Lighthouse`
+
+All three are old bugs, not regressions from this branch. They surfaced in the
+Task 6 audit and are recorded here rather than fixed on the spot, because each one
+touches markup the task-6 diff had no business changing.
+
+- [ ] `layout/headre/Swap.jsx:5-7` — the theme-toggle checkbox has no accessible
+      name. The wrapping `<label className="swap swap-rotate">` has no text
+      content, and the `<input type="checkbox" />` has no `aria-label`. This is
+      the Lighthouse `label` failure and the cause of `agent-accessibility-tree`.
+      Fix: `aria-label="Toggle dark mode"` (or a visually hidden `<span>`).
+- [ ] `LayoutScreen/Linkat.jsx:25` — the Discord link is `<a href="">`, so
+      clicking it reloads the current page instead of navigating. Either give it
+      the real Discord URL or drop the anchor and render the image on its own.
+      Unrelated to `alt`; do not fix it inside an a11y-attributes commit.
+- [ ] Heading order — the pages skip levels (an `h1` followed by `h3`). Lighthouse
+      `heading-order`. Fixing it properly means deciding the outline for
+      `HeroSec2`, `ContactsContant` (`h2` → `h3` inside a card), and
+      `NavbarXl`/`TopFooter`, which both use `h1` for the wordmark. This is the
+      one to look at first, because a real fix touches several components and the
+      wordmark `h1` may need to become a `p` or a `div`.
+
+**Verify:** `npx eslint .` → 0 ✅ · `npm run build` ✅ · Lighthouse snapshot
+re-run: `label`, `agent-accessibility-tree` and `heading-order` all pass, and
+accessibility is no longer capped by them · the theme toggle still flips, and the
+left-hand social links still work
+**Note:**
+
+---
+
 ## Not in scope — needs a separate go-ahead
 
 - [ ] Compressing the project images (~13 MB total; `pro2.png` alone is 2.7 MB).
       Big change, separate branch.
 - [ ] Loading the Fira Code font or removing it from `index.css`.
+- [ ] Also still unaddressed, found during the Task 6 audit and folded into Task 9
+      above rather than left off the list: the unlabelled theme-toggle checkbox
+      (`Swap.jsx:7`), the empty `href=""` Discord link (`Linkat.jsx:25`), and the
+      skipped heading levels. The two remaining Lighthouse image findings,
+      `image-aspect-ratio` and `image-size-responsive`, are the same underlying
+      cause as the image-compression item above, so they stay there.
 - [ ] Moving `Error404` inside `Layout` so 404s get a header/footer (routing change).
 - [ ] Renaming the misspelled folders/files (`projcts`, `Contant`, `headre`, `Componant`).
 - [ ] Tailwind/daisyUI config, CSS variables, TypeScript, any backend.
