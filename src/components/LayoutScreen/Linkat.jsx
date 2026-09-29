@@ -22,9 +22,7 @@ export default function Linkat() {
             <a href="https://github.com/safooahmed1">
               <img src={githup} alt="GitHub" />
             </a>
-            <a href="">
-              <img src={discord} alt="Discord" />
-            </a>
+            <img src={discord} alt="" />
             <a href="https://www.linkedin.com/in/saif-eldeen-ahmed-766a11237/">
               <img src={linkdin} alt="LinkedIn" />
             </a>

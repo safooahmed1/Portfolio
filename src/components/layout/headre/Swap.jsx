@@ -4,7 +4,10 @@ export default function Swap() {
       <div className="">
         <label className="swap swap-rotate">
           {/* this hidden checkbox controls the state */}
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            aria-label="Switch between light and dark theme"
+          />
 
           {/* sun icon */}
           <svg

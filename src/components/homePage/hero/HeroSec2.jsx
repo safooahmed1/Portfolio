@@ -37,10 +37,10 @@ export default function HeroSec2() {
           variants={slideFromBottom}
         >
           <div className="w-4 h-4 bg-[#C778DD]"></div>
-          <h3 className="w-[278px] md:w-full font-medium text-[#ABB2BF]">
+          <h2 className="w-[278px] md:w-full font-medium text-[#ABB2BF]">
             Currently working on{" "}
             <span className="text-white font-semibold">Portfolio</span>
-          </h3>
+          </h2>
         </motion.div>
       </motion.div>
     </>

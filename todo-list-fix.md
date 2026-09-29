@@ -455,16 +455,16 @@ All three are old bugs, not regressions from this branch. They surfaced in the
 Task 6 audit and are recorded here rather than fixed on the spot, because each one
 touches markup the task-6 diff had no business changing.
 
-- [ ] `layout/headre/Swap.jsx:5-7` — the theme-toggle checkbox has no accessible
+- [x] `layout/headre/Swap.jsx:5-7` — the theme-toggle checkbox has no accessible
       name. The wrapping `<label className="swap swap-rotate">` has no text
       content, and the `<input type="checkbox" />` has no `aria-label`. This is
       the Lighthouse `label` failure and the cause of `agent-accessibility-tree`.
       Fix: `aria-label="Toggle dark mode"` (or a visually hidden `<span>`).
-- [ ] `LayoutScreen/Linkat.jsx:25` — the Discord link is `<a href="">`, so
+- [x] `LayoutScreen/Linkat.jsx:25` — the Discord link is `<a href="">`, so
       clicking it reloads the current page instead of navigating. Either give it
       the real Discord URL or drop the anchor and render the image on its own.
       Unrelated to `alt`; do not fix it inside an a11y-attributes commit.
-- [ ] Heading order — the pages skip levels (an `h1` followed by `h3`). Lighthouse
+- [x] Heading order — the pages skip levels (an `h1` followed by `h3`). Lighthouse
       `heading-order`. Fixing it properly means deciding the outline for
       `HeroSec2`, `ContactsContant` (`h2` → `h3` inside a card), and
       `NavbarXl`/`TopFooter`, which both use `h1` for the wordmark. This is the
@@ -475,7 +475,118 @@ touches markup the task-6 diff had no business changing.
 re-run: `label`, `agent-accessibility-tree` and `heading-order` all pass, and
 accessibility is no longer capped by them · the theme toggle still flips, and the
 left-hand social links still work
-**Note:**
+**Note (2026-09-29):**
+
+**All three fixed, and confirmed by Lighthouse on the production build, not the
+dev server.** I ran `npm run build` + `npm run preview` and audited the real
+output, so nothing below depends on HMR.
+
+| category | `main` | branch |
+|---|---|---|
+| Accessibility | 65 | **95** |
+| Best Practices | 92 | 92 |
+| SEO | 92 | **100** |
+| Agentic Browsing | 33 | **67** |
+
+Every audit that changed, all of them `0 → PASS`:
+`label` · `agent-accessibility-tree` · `heading-order` · `image-alt` (Task 6) ·
+`link-name`. I diffed the two `report.json` files audit-by-audit rather than
+eyeballing the scores, so this list is complete, not a sample.
+
+**1. `Swap.jsx` — the checkbox had no accessible name.** Added
+`aria-label="Switch between light and dark theme"` to the `<input>`. Read back
+from the DOM: the accessible name now resolves to that string instead of the
+empty string, and the query for unlabelled form controls returns `[]` on all
+five routes.
+
+**The toggle itself does not work, and did not work before this task either.**
+I checked, and there is no theme logic anywhere in the codebase — no
+`data-theme` attribute, no `useTheme`, no `dark:` variant anywhere in `src/`,
+nothing in `index.css`. The checkbox is pure daisyUI `swap` markup that
+visually flips the two icons and changes nothing else. I did **not** add theme
+switching, because that is a feature, not an a11y fix, and it would need a
+colour pass across the whole site. So the honest status is: the control is now
+correctly labelled, and it still only swaps two icons. Recorded below.
+
+**2. `Linkat.jsx:25` — the empty Discord `href`.** There is no Discord URL
+anywhere in the repo — I grepped the source, the store, `index.html` and
+`public/`. Rather than invent a plausible-looking invite URL, I used the
+fallback the task itself specified: dropped the dead anchor and rendered the
+image on its own. It is now `<img src={discord} alt="" />` — decorative, since
+it is no longer interactive, and the two real links beside it are untouched.
+Verified: a DOM query for `a[href=""]` returns 0 on all five routes, and the
+GitHub and LinkedIn anchors still point at their original URLs.
+
+If you have the Discord invite, that is a one-line change and the anchor can go
+back. I did not want to hardcode a URL I cannot verify exists.
+
+**3. Heading order — this was the real work, and it was worse than the task
+recorded.** The task described "an `h1` followed by `h3`". In fact four
+components were using `h1` for things that are not headings at all, which meant
+every page had **three or four `h1`s** and the levels jumped around depending on
+what you were looking at.
+
+What changed and why:
+
+- `NavbarXl` and `TopFooter` both rendered the `SAFOO` wordmark as an `h1`. A
+  logo is not a document heading. Both are now `<p>`, which is what they always
+  should have been. This alone removed two competing `h1`s per page.
+- `TopFooter` rendered the email address as an `h4` — the single worst offender,
+  and it is what made Lighthouse report a jump. It is plain text, now a `<p>`.
+- `SkillMap` used `h1` for each of `Languages` / `Tools` / `Frameworks` /
+  `Other` — four more `h1`s on both the home page and `/about-me`. These are
+  subsection titles under the page's `#skills` `h2`, so they are now `h3`.
+- `HeroSec2`'s "Currently working on Portfolio" card was an `h3` sitting
+  directly under the hero `h1`, which is the exact `h1 → h3` skip Lighthouse
+  flagged. It is now `h2`.
+
+**I did not change the level of anything inside `ContactsContant`.** The task
+suggested `h2 → h3` for that card, and I tried it, then reverted it. On
+`/contacts` the card is the only thing after the page `h1`, so dropping it to
+`h3` *creates* the very skip I was removing. It reads `h1 → h2 → h3 → h3` on that
+route and is already correct. The task's suggestion would have been right for
+the home page and wrong for `/contacts`; the component is shared, so the higher
+level is the one that works in both places.
+
+Result, per route, with the levels counted in the live DOM:
+
+| route | sequence | skips | `h1` count |
+|---|---|---|---|
+| `/` | `1,2,2,3,2,2,2,2,2,3,3,3,3,2,3,2,3,2,3,3,3` | none | 1 |
+| `/projects` | `1,2,…,2,3` | none | 1 |
+| `/about-me` | `1,2,3,3,3,3,3` | none | 1 |
+| `/contacts` | `1,2,3,3,3` | none | 1 |
+| 404 | `1` | none | 1 |
+
+**One extra bug found on the way: an empty heading.** `/about-me` was rendering
+an empty `<h2>` — a heading element with no text and no size. It came from
+`AboutMePageComponant` passing `tittle1=""` into `TitleComponent`, which
+suppressed the `#` prefix but still emitted the `h2` wrapper. The original code
+was already trying to handle the empty case; it just handled it half-way. Now
+the whole `h2` is skipped when `tittle1` is empty. Heading-order would not have
+caught this, so it would have sat here indefinitely otherwise.
+
+**No visual change.** I diffed the computed font-size and weight of every element
+I retagged, before and after, and they are identical — `SkillMap` is still 16px
+/600, the hero card still 16px/500, the wordmark and footer email still 16px.
+Tailwind's base reset neutralises the browser's heading defaults, so changing the
+tag did not change a pixel. Nothing reflowed, the animations still run, and all
+five routes still render with 0 broken images and 0 images missing `alt`.
+
+**Still open, deliberately:**
+
+- The theme toggle is labelled but inert. Wiring it up means a real light theme
+  across every component, so it needs its own go-ahead.
+- Discord is a non-link until there is a real URL for it.
+- `target-size` now fails: the `Contact me!!` link inside the hero button has
+  too little tap area. Pre-existing, surfaced by the run, not caused by this
+  task.
+- The four Lighthouse failures still standing are `image-aspect-ratio`,
+  `image-size-responsive` (both the image-compression item), `target-size`, and
+  `llms-txt`.
+
+Dev and preview servers stopped afterwards; the temporary `main` worktree used
+for the comparison was removed.
 
 ---
 
@@ -489,12 +600,18 @@ left-hand social links still work
       previews on Slack, WhatsApp, LinkedIn and X will render it as a tiny square
       or drop it. Task 8 declared its real dimensions and added alt text, which
       is the honest minimum, but the asset itself needs designing.
-- [ ] Also still unaddressed, found during the Task 6 audit and folded into Task 9
-      above rather than left off the list: the unlabelled theme-toggle checkbox
-      (`Swap.jsx:7`), the empty `href=""` Discord link (`Linkat.jsx:25`), and the
-      skipped heading levels. The two remaining Lighthouse image findings,
-      `image-aspect-ratio` and `image-size-responsive`, are the same underlying
-      cause as the image-compression item above, so they stay there.
+- [ ] Wiring up the theme toggle in `Swap.jsx`. Task 9 gave the checkbox an
+      accessible name, but the control is inert: there is no `data-theme`, no
+      `useTheme`, and no `dark:` variant anywhere in `src/`. It only swaps the
+      sun and moon icons. Making it real means designing a light palette across
+      every component, which is a feature, not a fix.
+- [ ] Restoring the Discord link in `LayoutScreen/Linkat.jsx` once there is a
+      real invite URL. Task 9 dropped the empty `href=""` anchor rather than
+      guessing a URL, so the icon is currently a non-interactive image.
+- [ ] `target-size` (Lighthouse, mobile-oriented): the `Contact me!!` link in
+      `HeroSec1.jsx:44` sits inside a `<button>` that wraps a `<Link>`, so the
+      whole thing has a small tap target. Pre-existing, surfaced by the Task 9
+      audit run, not caused by it.
 - [ ] Moving `Error404` inside `Layout` so 404s get a header/footer (routing change).
 - [ ] Renaming the misspelled folders/files (`projcts`, `Contant`, `headre`, `Componant`).
 - [ ] Tailwind/daisyUI config, CSS variables, TypeScript, any backend.

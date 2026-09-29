@@ -15,13 +15,13 @@ export default function TitleComponent({ tittle1 }) {
           className="flex justify-between items-center"
           variants={zoomIn}
         >
-          <h2 className="text-[32px] font-medium whitespace-nowrap ">
-            {tittle1 == "" ? null : (
+          {tittle1 == "" ? null : (
+            <h2 className="text-[32px] font-medium whitespace-nowrap ">
               <span className="text-[#C778DD] text-[32px] font-medium">#</span>
-            )}
 
-            {tittle1}
-          </h2>
+              {tittle1}
+            </h2>
+          )}
         </motion.div>
       </motion.div>
     </>

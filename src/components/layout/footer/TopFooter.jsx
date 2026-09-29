@@ -22,11 +22,11 @@ export default function TopFooter() {
             {/* logo */}
             <div className="flex items-center gap-2 h-5">
               <img src={logo} alt="" className="w-4 h-4" />
-              <h1 className="font-bold text-[16px]">SAFOO</h1>
+              <p className="font-bold text-[16px]">SAFOO</p>
             </div>
             {/* emil */}
             <div>
-              <h4 className="text-[#ABB2BF]">safoo468@icloud.com</h4>
+              <p className="text-[#ABB2BF]">safoo468@icloud.com</p>
             </div>
           </div>
           <p>front-end developer and Mechanical Engineer</p>
