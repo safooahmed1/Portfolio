@@ -66,14 +66,29 @@ is the rule that actually fixed the 30 errors.
 
 ## Task 2 — `fix(router): repair broken section links`
 
-- [ ] `krkba/HeaderTittel.jsx:21` — `to={"/work"}` → `to={"/projects"}`
-      (`/work` is not a route, every section heading 404s on click)
-- [ ] `krkba/ButtonViewAll.jsx:9` — `to={tittle}` → absolute `to={`/${tittle}`}`
-      (relative path only resolves by accident from `/`)
+- [x] `krkba/HeaderTittel.jsx` — `to={"/work"}` → `/${tittle}`
+- [x] `krkba/ButtonViewAll.jsx:9` — `to={tittle}` → absolute `to={`/${tittle}`}`
 
-**Verify:** `npm run build` ✅ · click `#projects`, `#about-me`, `#contacts` on the
-home page — each lands on a real route, no 404
-**Note:**
+**Verify:** `npx eslint .` → 6 problems (unchanged, none of them here) ✅ ·
+`npm run build` ✅ 5.60s ✅ · live browser check on the dev server, all below ✅
+**Note (2026-09-29):** Verified in a real browser against `npm run dev`, not just
+by reading the diff.
+
+- Heading links now render as `/projects`, `/about-me`, `/contacts` — three real
+  routes. Before, all three pointed at `/work`, which falls through to `*` and
+  renders `Error404`. No 404 occurs.
+- "View all" links render as the same three absolute paths, so they work from any
+  route, not only from `/`.
+- `#skills` has no page of its own, so its heading is now rendered as plain markup
+  rather than a link that would 404. The existing `tittle == "skills"` guard on
+  `ButtonViewAll` already did the same job for the button; the heading had no such
+  guard and was the one still pointing at `/work`.
+- Zero console errors or warnings on the home page after the change.
+- Checked the route table in `App.jsx` against the four `tittle` values actually
+  passed in (`projects`, `skills`, `about-me`, `contacts`) — no other value exists,
+  so no case was left unhandled.
+
+Dev server stopped afterwards; no stray process left running.
 
 ---
 

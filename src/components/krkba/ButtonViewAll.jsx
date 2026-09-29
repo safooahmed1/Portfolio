@@ -6,7 +6,7 @@ export default function ButtonViewAll({ tittle }) {
     <>
       <h3>
         <Link
-          to={tittle}
+          to={`/${tittle}`}
           className="font-medium text-[16px] flex items-center gap-3 hover:text-[#C778DD]"
         >
           View all <HiOutlineArrowNarrowRight />
