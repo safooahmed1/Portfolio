@@ -13,7 +13,7 @@ export default function NavbarXl({ links }) {
           <h1 className="font-bold text-[16px]">SAFOO</h1>
         </div>
         <nav className="md:flex bg-[#282C33] hidden gap-8">
-          {links.map((el, index) => {
+          {links.map((el) => {
             const isActive = location.pathname === el.path;
             return (
               <Link
@@ -21,7 +21,7 @@ export default function NavbarXl({ links }) {
                 to={el.path}
                 className={
                   isActive
-                    ? "font-medium text-whit"
+                    ? "font-medium text-white"
                     : "font-normal text-[#ABB2BF] hover:text-white"
                 }
               >

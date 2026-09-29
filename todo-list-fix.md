@@ -123,13 +123,42 @@ Dev server stopped afterwards; no stray process left running.
 
 ## Task 4 — `fix(navbar): text-whit typo and drop unused index param`
 
-- [ ] `layout/headre/NavbarXl.jsx:24` — `"font-medium text-whit"` → `"font-medium text-white"`
+- [x] `layout/headre/NavbarXl.jsx:24` — `"font-medium text-whit"` → `"font-medium text-white"`
       (not a real Tailwind class, so the active nav link never turns white)
-- [ ] `layout/headre/NavbarXl.jsx:16` — drop the unused `index` map param
+- [x] `layout/headre/NavbarXl.jsx:16` — drop the unused `index` map param
 
-**Verify:** `npm run lint` → 3 errors · `npm run build` ✅ · the active top-nav
-link is white on `/`, `/projects`, `/about-me`, `/contacts`
-**Note:**
+**Verify:** `npx eslint .` → 4 problems ✅ · `npm run build` ✅ 5.90s ✅ ·
+live browser check of the top nav on all four routes ✅
+**Note (2026-09-29):** Verified in a real browser against `npm run dev` at a
+1280px viewport, since `NavbarXl` is `hidden md:flex` and never renders below `md`.
+
+- The typo was a real no-op, not a subtle colour mismatch: the built CSS contains
+  zero rules for `text-whit`, and grepping `dist/assets/*.css` confirms it. Before
+  the fix the active link inherited the parent's white and only differed from its
+  inactive siblings by `font-medium` vs `font-normal` — the weight change was
+  carrying the whole active state. `.text-white{color:var(--color-white)}` is now
+  in the bundle.
+- Computed styles, measured per route via `getComputedStyle`, after the fix:
+  - `/`        → `#Home` white, the other three `#ABB2BF`
+  - `/projects` → `#Works` white, the other three `#ABB2BF`
+  - `/about-me` → `#About-Me` white, the other three `#ABB2BF`
+  - `/contacts` → `#contacts` white, the other three `#ABB2BF`
+  - Exactly one active link on each route, so the `isActive` logic is intact.
+- The mobile dock (`NavbarSm`) was left alone; it already uses daisyUI's
+  `dock-active` and was never part of this bug.
+- Dropping `index` is safe: the only key in that loop is `key={el.path}`, which
+  never referenced it, so React keys are unchanged and the re-render behaviour
+  is identical.
+- Lint went 5 → 4, which is this task's `index` and nothing else.
+
+**Correction to this task's own plan:** it predicted "lint → 3 errors", but the
+real number is 4. The prediction was off because the remaining four are
+`Square1.jsx` (`slideFromLeft`), `Square2.jsx` (`slideFromRight`),
+`Projects.jsx` (`tittle2`) and `store/index.jsx` (`set`, the unused `set` param
+of the dead `usdLoader`), all of which Task 5 removes together. Task 5's own
+"lint → 0" target was right.
+
+Dev server stopped afterwards; no stray process left running.
 
 ---
 
