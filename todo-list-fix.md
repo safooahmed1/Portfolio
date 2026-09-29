@@ -223,18 +223,76 @@ Dev server stopped afterwards; no stray process left running.
 
 ## Task 6 — `a11y: add alt text to 12 images`
 
-- [ ] `homePage/contacts/ContactsContant.jsx:33,37` — discord, mail
-- [ ] `homePage/projctsLine/Box.jsx:18` — project image → `alt={el.name}`
-- [ ] `homePage/hero/Quote.jsx:17,21` — the two avatar images
-- [ ] `homePage/skills/MySkills.jsx:20` — skills illustration
-- [ ] `layout/headre/NavbarXl.jsx:12` — logo → `alt="SAFOO"`
-- [ ] `layout/footer/TopFooter.jsx:37,38,39` — discord, linkedin, github
-- [ ] `LayoutScreen/Linkat.jsx:23,26,29` — github, discord, linkedin
+- [x] `homePage/contacts/ContactsContant.jsx:33,37` — discord, mail
+- [x] `homePage/projctsLine/Box.jsx:18` — project image → `alt={el.name}`
+- [x] `homePage/hero/Quote.jsx:17,21` — the two quotation-mark images → `alt=""`
+- [x] `homePage/skills/MySkills.jsx:20` — skills illustration → `alt=""`
+- [x] `layout/headre/NavbarXl.jsx:12` — logo → `alt="SAFOO"`
+- [x] `layout/footer/TopFooter.jsx:37,38,39` — discord, linkedin, github
 
-Decorative images get `alt=""`, meaningful ones get real text.
+**Scope correction — this list was incomplete.** The plan only covered `<img>`
+tags and said "12 images". Two problems with that:
 
-**Verify:** `npm run lint` → 0 ✅ · `npm run build` ✅ · images still render
-**Note:**
+- `grep "<img"` does not match `<motion.img`, so it missed **10** animation-driven
+  images. These are now fixed too:
+  - `homePage/hero/HeroSec2.jsx:15,20,25` — `logoB`, the portrait, `dots`
+  - `homePage/aboutMe/AboutMeContant2.jsx:14,19,24` — two `dots`, the portrait
+  - `LayoutScreen/Square1.jsx`, `Square2.jsx`, `Dots1.jsx`, `Dots2.jsx`
+- `layout/footer/TopFooter.jsx:24` was listed nowhere and already had a correct
+  `alt=""`; left as is.
+
+Real total: **24 image elements**, not 12.
+
+**Alt text decisions** — decorative means `alt=""` (announced as nothing), not a
+filename and not a description:
+
+- `alt=""` (11): both `coma.png` quotation marks in `Quote.jsx`, the `Group 36.png`
+  skills illustration, all five `dots.png`, both `square.png`, and the footer logo
+  which already had it. All of these are pure decoration beside real text.
+- Real text (13): `alt={el.name}` for project images so the alt matches the `h2`
+  right below it; `"Discord"`, `"Email"`, `"LinkedIn"`, `"GitHub"` for the icons,
+  which are the only thing identifying those links; `"SAFOO"` for both logos; and
+  `"Saif Ahmed, mechanical engineer and front-end developer"` for the two
+  portraits in `HeroSec2` and `AboutMeContant2`, which are photos of a person and
+  the closest thing on the page to a bio.
+
+**Verify:** `npx eslint .` → 0, exit 0 ✅ · `npm run build` ✅ 7.92s ✅ ·
+live browser check on all routes ✅ · Lighthouse `image-alt` → **score 1** ✅
+**Note (2026-09-29):** Verified in a real browser and with a Lighthouse audit.
+
+Per-route `alt` attribute coverage, measured on the live DOM:
+
+| route | images | missing `alt` | `alt=""` | named `alt` | broken images |
+|---|---|---|---|---|---|
+| `/` | 27 | **0** | 11 | 16 | 0 |
+| `/projects` | 24 | **0** | 5 | 19 | 0 |
+| `/about-me` | 16 | **0** | 8 | 8 | 0 |
+| `/contacts` | 14 | **0** | 5 | 9 | 0 |
+| `/nope` | 7 | **0** | 4 | 3 | 0 |
+
+- Zero images are missing `alt` on any route now, up from 10 on `/` alone.
+- Source count cross-check: 14 `<img>` + 10 `<motion.img>` = 24 elements, and
+  exactly 24 `alt=` attributes in `src/`.
+- Nothing shifted: no image has zero width or height, and the measured boxes still
+  match the old ones (`dots` 84/120/118.77px, `Square1` 80x140, `Square2` 86x86,
+  hero portrait 471.58px, about portrait 316.73px).
+- Lighthouse `image-alt` now scores **1** with no failing elements. Overall
+  accessibility is 81, and the remaining 7 audit failures are all outside this
+  task and pre-existing: `image-aspect-ratio`, `image-size-responsive`,
+  `heading-order`, `label` (the unlabelled theme-toggle checkbox in `Swap.jsx`),
+  `target-size`, `agent-accessibility-tree` (a wrapper for the `label` failure),
+  and `llms-txt`. I did not touch any of them — they belong in their own tasks.
+
+**New a11y issues found, not fixed here** (outside Task 6's scope, worth their own
+task later):
+- `Swap.jsx:7` — the theme-toggle `<input type="checkbox" />` has no `<label>`
+  text and no `aria-label`. This is the `label` Lighthouse failure. The `<label>`
+  element wrapping it has no text content either.
+- `Linkat.jsx:25` — the Discord link has `href=""`, so clicking it reloads the
+  current page instead of going anywhere. Pre-existing, unrelated to `alt`.
+- `heading-order` — the page jumps heading levels (an `h1` followed by `h3`).
+
+Dev server stopped afterwards; no stray process left running.
 
 ---
 

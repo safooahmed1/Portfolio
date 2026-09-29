@@ -16,10 +16,12 @@ export default function Quote() {
           <div className="border border-[#ABB2BF] flex items-center justify-center relative w-fit p-6">
             <img
               src={coma}
+              alt=""
               className="absolute left-8 -top-5 p-2 bg-[#282C33]"
             />
             <img
               src={coma}
+              alt=""
               className="absolute -bottom-5 right-8 p-2 bg-[#282C33]"
             />
             <p className="text-[24px] font-medium text-white ">

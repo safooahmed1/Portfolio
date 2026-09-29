@@ -12,7 +12,7 @@ export default function Square2() {
           initial="hidden"
           animate="visible"
         >
-          <motion.img src={square} variants={slideFromLeft} />
+          <motion.img src={square} alt="" variants={slideFromLeft} />
         </motion.div>
       </div>
     </>

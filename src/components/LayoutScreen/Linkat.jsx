@@ -20,13 +20,13 @@ export default function Linkat() {
           <div className="h-[191px] w-px bg-[#ABB2BF] "></div>
           <div className="flex flex-col items-center gap-2">
             <a href="https://github.com/safooahmed1">
-              <img src={githup} />
+              <img src={githup} alt="GitHub" />
             </a>
             <a href="">
-              <img src={discord} />
+              <img src={discord} alt="Discord" />
             </a>
             <a href="https://www.linkedin.com/in/saif-eldeen-ahmed-766a11237/">
-              <img src={linkdin} />
+              <img src={linkdin} alt="LinkedIn" />
             </a>
           </div>
         </motion.div>

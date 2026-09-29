@@ -13,16 +13,19 @@ export default function AboutMeContant2() {
       >
         <motion.img
           src={dots}
+          alt=""
           className="absolute top-1/4 left-0 md:-left-5 w-[120px] md:w-30"
           variants={zoomIn}
         />
         <motion.img
           src={pic2}
+          alt="Saif Ahmed, mechanical engineer and front-end developer"
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full border-b border-[#C778DD]"
           variants={zoomIn}
         />
         <motion.img
           src={dots}
+          alt=""
           className="absolute bottom-1/9 right-4 md:w-30"
           variants={zoomIn}
         />

@@ -11,7 +11,7 @@ export default function Dots2() {
         initial="hidden"
         animate="visible"
       >
-        <motion.img src={dots} variants={slideFromLeft} />
+        <motion.img src={dots} alt="" variants={slideFromLeft} />
       </motion.div>
     </div>
   );

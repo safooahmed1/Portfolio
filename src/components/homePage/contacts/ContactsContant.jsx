@@ -30,11 +30,11 @@ export default function ContactsContant() {
             Message me here
           </h2>
           <h3 className="flex gap-3">
-            <img src={discord} />
+            <img src={discord} alt="Discord" />
             safo.o468
           </h3>
           <h3 className="flex gap-3">
-            <img src={mail} />
+            <img src={mail} alt="Email" />
             safoo468@icloud.com
           </h3>
         </motion.div>

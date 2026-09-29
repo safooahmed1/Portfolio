@@ -11,7 +11,12 @@ export default function Square1() {
         initial="hidden"
         animate="visible"
       >
-        <motion.img src={square} className="w-20 h-35" variants={slideFromRight} />
+        <motion.img
+          src={square}
+          alt=""
+          className="w-20 h-35"
+          variants={slideFromRight}
+        />
       </motion.div>
     </div>
   );

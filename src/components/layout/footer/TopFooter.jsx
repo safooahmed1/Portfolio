@@ -34,9 +34,9 @@ export default function TopFooter() {
         <motion.div variants={slideFromRight} className="flex flex-col gap-2">
           <h3 className="text-2xl font-medium ">Media</h3>
           <div className="flex flex-row items-center gap-2">
-            <img src={discord} className="" />
-            <img src={linkdin} className="" />
-            <img src={githup} className="" />
+            <img src={discord} alt="Discord" className="" />
+            <img src={linkdin} alt="LinkedIn" className="" />
+            <img src={githup} alt="GitHub" className="" />
           </div>
         </motion.div>
       </motion.div>

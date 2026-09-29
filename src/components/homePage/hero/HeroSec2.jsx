@@ -14,16 +14,19 @@ export default function HeroSec2() {
       >
         <motion.img
           src={logoB}
+          alt="SAFOO"
           className="absolute top-1/4 left-0 md:left-10 w-[120px] md:w-50"
           variants={zoomIn}
         />
         <motion.img
           src={prson}
+          alt="Saif Ahmed, mechanical engineer and front-end developer"
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full"
           variants={zoomIn}
         />
         <motion.img
           src={dots}
+          alt=""
           className="absolute bottom-1/9 right-4 md:w-30"
           variants={zoomIn}
         />
