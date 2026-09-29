@@ -137,7 +137,7 @@ export const useProjcts = create(() => ({
     {
       name: "Portfolio",
       img: Portfolio,
-      dis: "This websit",
+      dis: "This website",
       github: "https://github.com/safooahmed1/Portfolio",
     },
   ],
@@ -147,13 +147,16 @@ export const useSkills = create(() => ({
   skills: [
     {
       type: "Languages",
-      skill: ["JavaScript", "Python", "Arbic", "English", "Italy"],
+      skill: ["JavaScript", "Python", "Arabic", "English", "Italian"],
     },
     {
       type: "Tools",
       skill: ["VSCode", "Fedora", "Linux", "Claude", "Git", "Strapi", "Gnome"],
     },
-    { type: "Frameworks", skill: ["React", "🖒"] },
-    { type: "Other", skill: ["HTML", "CSS", "Tailwindcss", "React", "Strapi"] },
+    { type: "Frameworks", skill: ["React"] },
+    {
+      type: "Other",
+      skill: ["HTML", "CSS", "Tailwind CSS"],
+    },
   ],
 }));

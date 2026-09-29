@@ -365,18 +365,87 @@ Dev server stopped afterwards; no stray process left running.
 
 ## Task 8 — `content: fix copy typos and stale SEO dates`
 
-- [ ] `store/index.jsx:155` — `"Arbic"` → `"Arabic"`
-- [ ] `store/index.jsx:140` — `"This websit"` → `"This website"`
-- [ ] `pages/ContactPage.jsx:6` — `paragraph = "Who am i?"` is copy-pasted from AboutmePage, should describe contact
-- [ ] `store/index.jsx:151-163` — skills list: drop `"React"` duplicated in both
+- [x] `store/index.jsx:155` — `"Arbic"` → `"Arabic"`
+- [x] `store/index.jsx:140` — `"This websit"` → `"This website"`
+- [x] `pages/ContactPage.jsx:6` — `paragraph = "Who am i?"` is copy-pasted from AboutmePage, should describe contact
+- [x] `store/index.jsx:151-163` — skills list: drop `"React"` duplicated in both
       Frameworks and Other, drop the stray `🖒` emoji
-- [ ] `public/sitemap.xml` — `lastmod` is `2026-05-06`, update it
-- [ ] `index.html` — `og:image` / `twitter:image` point at `/logoF.png`; confirm that
-      file actually exists in `public/`
+- [x] `public/sitemap.xml` — `lastmod` was `2026-05-06`, now `2026-09-29`
+- [x] `index.html` — `og:image` / `twitter:image` point at `/logoF.png`; confirmed
+      the file exists and added the missing width/height/alt meta
 
-**Verify:** `npm run lint` → 0 ✅ · `npm run build` ✅ · read the changed copy on
-screen
-**Note:**
+**Verify:** `npx eslint .` → 0, exit 0 ✅ · `npm run build` ✅ 8.38s ✅ ·
+live browser read of every changed string ✅ · sitemap parsed as XML ✅
+**Note (2026-09-29):**
+
+**Copy fixes, confirmed on screen (not just in the diff):**
+
+| where | before | after |
+|---|---|---|
+| skills, Languages | `Arbic` | `Arabic` |
+| skills, Languages | `Italy` | `Italian` |
+| skills, Frameworks | `React`, `🖒` | `React` |
+| skills, Other | `HTML`, `CSS`, `Tailwindcss`, `React`, `Strapi` | `HTML`, `CSS`, `Tailwind CSS` |
+| project card, Portfolio | `This websit` | `This website` |
+| `/contacts` subtitle | `Who am i?` | `get in touch` |
+
+- `Italy` → `Italian` and `Tailwindcss` → `Tailwind CSS` were not in the original
+  plan. Both are on the same lines the task already had to touch, and both are
+  the same class of error the task exists to remove — a country name listed as a
+  language, and a missing space in a product name. Flagging them rather than
+  leaving two known typos one step from fixed.
+- The `Other` list lost both duplicates, not just `React`: `React` was already in
+  Frameworks and `Strapi` was already in Tools, so keeping either in `Other` was
+  the same bug. Verified on the rendered page: `React` now appears once and
+  `Strapi` once, down from twice each.
+- I did **not** invent replacements. The lists now read:
+  `Languages: JavaScript, Python, Arabic, English, Italian` ·
+  `Tools: VSCode, Fedora, Linux, Claude, Git, Strapi, Gnome` ·
+  `Frameworks: React` · `Other: HTML, CSS, Tailwind CSS`.
+  `Tailwindcss` → `Tailwind CSS` is the only rename, and no skill was added or
+  removed beyond the duplicates and the emoji.
+- `/contacts` paragraph: `get in touch` matches the `who am i?` pattern already
+  used on `/about-me` (lowercase, question-style tagline). `Who am i?` is gone
+  from the contact page and `who am i?` correctly remains on `/about-me` — the
+  fix did not touch the about page, which is what made the copy-paste a bug.
+
+**SEO:**
+
+- `public/sitemap.xml` — all four `lastmod` values moved `2026-05-06` →
+  `2026-09-29`, matching today. The file is hand-maintained and has exactly the
+  four real routes, nothing missing and nothing extra. Re-parsed it as XML to
+  confirm it is still well-formed, and printed every `loc` → `lastmod` pair.
+- `index.html` — the plan asked to *confirm* `/logoF.png` exists. It does:
+  `public/logoF.png`, 220 bytes, PNG 52x52 RGBA, and Vite copies it to
+  `dist/logoF.png` so the absolute URL resolves in production.
+  **But it is a 52x52 square logo being used as the link-preview image.** Every
+  social platform renders OG images around 1200x630, so a 52x52 icon will show up
+  as a tiny square or be dropped. I added `og:image:width`, `og:image:height` and
+  `og:image:alt` (plus `twitter:image:alt`) so at minimum the dimensions are
+  declared honestly and the image has an accessible name. **A real 1200x630 card
+  is still needed and that is a design task, not a copy fix** — listed below.
+
+**Nothing else moved:**
+
+- All five routes still render, with 0 broken images and 0 images missing `alt`
+  on every one, and the header/footer still present on the four real pages.
+- No console errors or warnings.
+- The skills list still renders in both places it appears — the home page and
+  `/about-me` — with the Languages/Tools/Frameworks/Other headings intact, so
+  trimming the arrays did not break the `SkillMap` layout.
+- `npx eslint .` 0, `npm run build` ✅.
+
+**Still open, deliberately not in this task:**
+
+- A real 1200x630 OG card image. The 52x52 logo stays until one is designed.
+- The CSS bloat from the `.md` files at the repo root (this branch ships 37.1 kB
+  of CSS where `main` ships 27.3 kB, all of it unused daisyUI classes triggered by
+  ordinary English words in `AGENTS.md` and `todo-list-fix.md`). The fix is
+  `@source not` in `index.css`, which is a Tailwind setup change and needs
+  explicit sign-off.
+- The three a11y bugs recorded in Task 9.
+
+Dev server stopped afterwards; no stray process left running.
 
 ---
 
@@ -415,6 +484,11 @@ left-hand social links still work
 - [ ] Compressing the project images (~13 MB total; `pro2.png` alone is 2.7 MB).
       Big change, separate branch.
 - [ ] Loading the Fira Code font or removing it from `index.css`.
+- [ ] Designing a real 1200x630 OG card. `public/logoF.png` is a 52x52 square
+      icon and it is what `og:image` and `twitter:image` both point at, so link
+      previews on Slack, WhatsApp, LinkedIn and X will render it as a tiny square
+      or drop it. Task 8 declared its real dimensions and added alt text, which
+      is the honest minimum, but the asset itself needs designing.
 - [ ] Also still unaddressed, found during the Task 6 audit and folded into Task 9
       above rather than left off the list: the unlabelled theme-toggle checkbox
       (`Swap.jsx:7`), the empty `href=""` Discord link (`Linkat.jsx:25`), and the

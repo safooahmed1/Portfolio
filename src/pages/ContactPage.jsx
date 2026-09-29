@@ -3,7 +3,7 @@ import TitlePage from "../components/krkba/TitlePage";
 
 export default function ContactPage() {
   let title = "contacts";
-  let paragraph = "Who am i?";
+  let paragraph = "get in touch";
   return (
     <>
       <div className="flex flex-col gap-10">
