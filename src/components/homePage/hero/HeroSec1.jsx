@@ -12,12 +12,12 @@ export default function HeroSec1() {
           variants={slideFromLeft}
         >
           Safoo is a
-          <span className="text-[#C778DD]"> front-end developer </span>and
-          <span className="text-[#C778DD]"> Mechanical Engineer</span>
+          <span className="text-[var(--accent)]"> front-end developer </span>and
+          <span className="text-[var(--accent)]"> Mechanical Engineer</span>
         </motion.h1>
 
         <motion.p
-          className="text-[#ABB2BF] text-[16px] md:w-6/12"
+          className="text-[var(--muted)] text-[16px] md:w-6/12"
           variants={slideFromLeft}
         >
           He developer responsive websites where technologies meet evolution
@@ -25,12 +25,12 @@ export default function HeroSec1() {
 
         <motion.div variants={slideFromLeft}>
           <motion.button
-            className="relative w-fit px-4 py-2 border font-medium border-[#C778DD] overflow-hidden"
+            className="relative w-fit px-4 py-2 border font-medium border-[var(--accent)] overflow-hidden"
             whileHover="hover"
             initial="initial"
           >
             <motion.span
-              className="absolute inset-0 bg-[#C778DD]"
+              className="absolute inset-0 bg-[var(--accent)]"
               variants={{
                 initial: { x: "-100%" },
                 hover: { x: 0 },
@@ -41,7 +41,10 @@ export default function HeroSec1() {
               }}
             />
             <span className="relative z-10">
-              <Link to={"/contacts"} className="text-white">
+              <Link
+                to={"/contacts"}
+                className="text-[var(--fg)] hover:text-white"
+              >
                 Contact me!!
               </Link>
             </span>

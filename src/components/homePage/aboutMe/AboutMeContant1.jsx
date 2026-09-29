@@ -7,7 +7,7 @@ export default function AboutMeContant1() {
       } = useAnimationStore();
   return (
     <>
-      <motion.div variants={slideFromRight} className="flex flex-col gap-8 text-xl font-medium text-[#ABB2BF] leading-[26px] md:w-5/12">
+      <motion.div variants={slideFromRight} className="flex flex-col gap-8 text-xl font-medium text-[var(--muted)] leading-[26px] md:w-5/12">
         <p>Hello, i’m Saif!</p>
         <p>
           I’m a front-end developer based in Alexandria, Egypt. I can

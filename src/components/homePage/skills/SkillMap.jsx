@@ -6,14 +6,14 @@ export default function SkillMap({ el }) {
   return (
     <>
       <motion.div
-        className="border border-[#ABB2BF] flex flex-col items-center h-fit"
+        className="border border-[var(--muted)] flex flex-col items-center h-fit"
         variants={slideFromBottom}
       >
-        <h3 className="px-3 py-2 border-b border-[#ABB2BF] font-semibold w-full">
+        <h3 className="px-3 py-2 border-b border-[var(--muted)] font-semibold w-full">
           {el.type}
         </h3>
         {/* skill */}
-        <div className="px-3 py-2 flex gap-3 flex-wrap text-[#ABB2BF]">
+        <div className="px-3 py-2 flex gap-3 flex-wrap text-[var(--muted)]">
           {el.skill.map((el, index) => {
             return <span key={index}>{el}</span>;
           })}

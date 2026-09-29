@@ -26,7 +26,7 @@ export default function TopFooter() {
             </div>
             {/* emil */}
             <div>
-              <p className="text-[#ABB2BF]">safoo468@icloud.com</p>
+              <p className="text-[var(--muted)]">safoo468@icloud.com</p>
             </div>
           </div>
           <p>front-end developer and Mechanical Engineer</p>

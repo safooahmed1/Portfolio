@@ -12,8 +12,8 @@ export default function TitlePage({ title, paragraph }) {
         viewport={{ once: true, amount: 0.2 }}
         className="flex flex-col gap-4"
       >
-        <h1 className="font-semibold text-[32px] ">
-          <span className="text-[#C778DD]">/</span>
+        <h1 className="font-semibold text-[32px] text-[var(--fg)]">
+          <span className="text-[var(--accent)]">/</span>
           {title}
         </h1>
         <p className="font-normal text-[16px]">{paragraph}</p>

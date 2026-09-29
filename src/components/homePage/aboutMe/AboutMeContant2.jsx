@@ -20,7 +20,7 @@ export default function AboutMeContant2() {
         <motion.img
           src={pic2}
           alt="Saif Ahmed, mechanical engineer and front-end developer"
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full border-b border-[#C778DD]"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full border-b border-[var(--accent)]"
           variants={zoomIn}
         />
         <motion.img

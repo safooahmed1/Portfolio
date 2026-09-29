@@ -12,9 +12,9 @@ export default function Box({ el }) {
     <>
       <motion.div
         variants={slideFromBottom}
-        className="border border-[#ABB2BF] flex flex-col min-h-[400px] overflow-hidden"
+        className="border border-[var(--muted)] flex flex-col min-h-[400px] overflow-hidden"
       >
-        <div className="border-b border-[#ABB2BF] w-full h-73 md:h-75 overflow-hidden">
+        <div className="border-b border-[var(--muted)] w-full h-73 md:h-75 overflow-hidden">
           <img
             src={el.img}
             alt={el.name}
@@ -24,7 +24,7 @@ export default function Box({ el }) {
         {/* contant */}
         <div className="flex flex-col justify-around h-full py-5">
           <h2 className=" text-[24px] font-medium px-5">{el.name}</h2>
-          <p className="px-5 text-[#ABB2BF] ">{el.dis}</p>
+          <p className="px-5 text-[var(--muted)] ">{el.dis}</p>
           {/* button */}
           <div className="flex gap-5 px-5">
             {github && <Btn name={btn1} to={github} />}

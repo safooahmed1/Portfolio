@@ -33,13 +33,13 @@ export default function HeroSec2() {
 
         {/* card */}
         <motion.div
-          className="border border-[#ABB2BF] flex items-center gap-2.5 absolute w-full bottom-0 md:bottom-5 bg-[#282C33] p-2"
+          className="border border-[var(--muted)] flex items-center gap-2.5 absolute w-full bottom-0 md:bottom-5 bg-[var(--surface)] p-2"
           variants={slideFromBottom}
         >
-          <div className="w-4 h-4 bg-[#C778DD]"></div>
-          <h2 className="w-[278px] md:w-full font-medium text-[#ABB2BF]">
+          <div className="w-4 h-4 bg-[var(--accent)]"></div>
+          <h2 className="w-[278px] md:w-full font-medium text-[var(--muted)]">
             Currently working on{" "}
-            <span className="text-white font-semibold">Portfolio</span>
+            <span className="text-[var(--fg)] font-semibold">Portfolio</span>
           </h2>
         </motion.div>
       </motion.div>

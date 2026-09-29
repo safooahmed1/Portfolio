@@ -7,12 +7,12 @@ export default function Btn({ name, to }) {
     <>
       <div className="">
         <motion.button
-          className="relative w-fit px-4 py-2 border font-medium border-[#C778DD] overflow-hidden"
+          className="relative w-fit px-4 py-2 border font-medium border-[var(--accent)] overflow-hidden"
           whileHover="hover"
           initial="initial"
         >
           <motion.span
-            className="absolute inset-0 bg-[#C778DD]"
+            className="absolute inset-0 bg-[var(--accent)]"
             variants={{
               initial: { x: "-100%" },
               hover: { x: 0 },
@@ -23,7 +23,10 @@ export default function Btn({ name, to }) {
             }}
           />
           <span className="relative z-10">
-            <Link to={to} className="text-white flex items-center gap-2">
+            <Link
+              to={to}
+              className="text-[var(--fg)] hover:text-white flex items-center gap-2"
+            >
               {name}
               <HiOutlineArrowNarrowRight />
             </Link>

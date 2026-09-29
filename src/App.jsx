@@ -10,7 +10,7 @@ import Seo from "./components/seo/Seo";
 
 export default function App() {
   return (
-    <div className="bg-[#282C33] text-white overflow-x-hidden">
+    <div className="bg-[var(--surface)] text-[var(--fg)] overflow-x-hidden">
       <BrowserRouter>
         <Seo />
         <LayoutScreen />

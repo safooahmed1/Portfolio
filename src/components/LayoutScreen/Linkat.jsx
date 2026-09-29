@@ -14,10 +14,10 @@ export default function Linkat() {
         animate="visible"
       >
         <motion.div
-          className="hidden md:flex flex-col fixed top-0 left-[17px] items-center gap-3 text-[#ABB2BF]"
+          className="hidden md:flex flex-col fixed top-0 left-[17px] items-center gap-3 text-[var(--muted)]"
           variants={slideFromTop}
         >
-          <div className="h-[191px] w-px bg-[#ABB2BF] "></div>
+          <div className="h-[191px] w-px bg-[var(--muted)] "></div>
           <div className="flex flex-col items-center gap-2">
             <a href="https://github.com/safooahmed1">
               <img src={githup} alt="GitHub" />

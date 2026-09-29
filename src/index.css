@@ -1,12 +1,32 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+@theme {
+  --font-mono: "Fira Code", monospace;
+}
+
+:root {
+  --surface: #282c33;
+  --fg: #ffffff;
+  --muted: #abb2bf;
+  --accent: #c778dd;
+}
+
+[data-theme="light"] {
+  --surface: #f5f3f7;
+  --fg: #1c1b22;
+  --muted: #5c6370;
+  --accent: #7a3a96;
+}
+
 body {
   font-family: "Fira Code", monospace;
+  background-color: var(--surface);
+  color: var(--fg);
 }
 
 html {
-  background-color: #282c33;
-  scrollbar-color: #c778dd #282c33;
+  background-color: var(--surface);
+  scrollbar-color: var(--accent) var(--surface);
   scrollbar-width: thin;
 }

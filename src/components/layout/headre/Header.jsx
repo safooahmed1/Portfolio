@@ -17,7 +17,7 @@ export default function Header() {
 
   return (
     <div className="">
-      <div className="lg:bg-[#282C33] container mx-auto flex px-4 md:px-0 z-30">
+      <div className="lg:bg-[var(--surface)] container mx-auto flex px-4 md:px-0 z-30">
         {/* navbar */}
         <NavbarXl links={links} />
         <NavbarSm links={links} />

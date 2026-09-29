@@ -1,11 +1,32 @@
+import { useEffect, useState } from "react";
+
+const STORAGE_KEY = "portfolio-theme";
+
 export default function Swap() {
+  const [isLight, setIsLight] = useState(
+    () => document.documentElement.getAttribute("data-theme") === "light"
+  );
+
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      "data-theme",
+      isLight ? "light" : "dark"
+    );
+    try {
+      localStorage.setItem(STORAGE_KEY, isLight ? "light" : "dark");
+    } catch {
+      // storage can be blocked; the toggle still works for this session
+    }
+  }, [isLight]);
+
   return (
     <>
       <div className="">
         <label className="swap swap-rotate">
-          {/* this hidden checkbox controls the state */}
           <input
             type="checkbox"
+            checked={isLight}
+            onChange={(e) => setIsLight(e.target.checked)}
             aria-label="Switch between light and dark theme"
           />
 

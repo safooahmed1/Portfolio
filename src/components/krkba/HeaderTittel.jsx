@@ -22,19 +22,19 @@ export default function HeaderTittel({ tittle }) {
             <h2 className="text-[32px] font-medium whitespace-nowrap ">
               {link ? (
                 <Link to={link}>
-                  <span className="text-[#C778DD] text-[32px] font-medium">
+                  <span className="text-[var(--accent)] text-[32px] font-medium">
                     #
                   </span>
                   {tittle}
                 </Link>
               ) : (
                 <>
-                  <span className="text-[#C778DD] text-[32px] font-medium">#</span>
+                  <span className="text-[var(--accent)] text-[32px] font-medium">#</span>
                   {tittle}
                 </>
               )}
             </h2>
-            <span className="bg-[#C778DD] h-px w-full"></span>
+            <span className="bg-[var(--accent)] h-px w-full"></span>
           </div>
           {tittle == "skills" ? null : (
             <ButtonViewAll tittle={tittle} />

@@ -5,7 +5,7 @@ export default function NavbarSm({ links }) {
   return (
     <>
       <div className="">
-        <nav className="md:hidden  bg-[#282C33] dock">
+        <nav className="md:hidden  bg-[var(--surface)] dock">
           {links.map((el) => {
             const isActive = location.pathname === el.path;
             return (
@@ -15,7 +15,7 @@ export default function NavbarSm({ links }) {
                 className={
                   isActive
                     ? "dock-active"
-                    : "font-normal text-[#ABB2BF] hover:text-white"
+                    : "font-normal text-[var(--muted)] hover:text-[var(--fg)]"
                 }
               >
                 <div className="size-[1.2em]">{el.icon}</div>

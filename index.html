@@ -4,6 +4,17 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/logoF.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // apply the saved theme before first paint so there is no dark flash
+      (function () {
+        try {
+          var saved = localStorage.getItem("portfolio-theme");
+          if (saved === "light") {
+            document.documentElement.setAttribute("data-theme", "light");
+          }
+        } catch (e) {}
+      })();
+    </script>
     <meta
       name="description"
       content="Saif Ahmed is a front-end developer and Mechanical Engineer based in Alexandria, Egypt, building responsive websites with React, Tailwind CSS, and modern web tools."

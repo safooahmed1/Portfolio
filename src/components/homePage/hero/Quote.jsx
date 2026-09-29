@@ -13,23 +13,23 @@ export default function Quote() {
     >
       <motion.div className="flex justify-center mt-20 " variants={zoomIn}>
         <div className="relative flex flex-col items-end">
-          <div className="border border-[#ABB2BF] flex items-center justify-center relative w-fit p-6">
+          <div className="border border-[var(--muted)] flex items-center justify-center relative w-fit p-6">
             <img
               src={coma}
               alt=""
-              className="absolute left-8 -top-5 p-2 bg-[#282C33]"
+              className="absolute left-8 -top-5 p-2 bg-[var(--surface)]"
             />
             <img
               src={coma}
               alt=""
-              className="absolute -bottom-5 right-8 p-2 bg-[#282C33]"
+              className="absolute -bottom-5 right-8 p-2 bg-[var(--surface)]"
             />
-            <p className="text-[24px] font-medium text-white ">
+            <p className="text-[24px] font-medium text-[var(--fg)] ">
               With great power comes great electricity bill
             </p>
           </div>
-          <div className="border border-t-0 border-[#ABB2BF] flex items-center justify-center w-fit p-6 ">
-            <p className="text-[24px] font-medium text-white ">- Dr. Who</p>
+          <div className="border border-t-0 border-[var(--muted)] flex items-center justify-center w-fit p-6 ">
+            <p className="text-[24px] font-medium text-[var(--fg)] ">- Dr. Who</p>
           </div>
         </div>
       </motion.div>

@@ -17,16 +17,16 @@ export default function ContactsContant() {
       >
         <motion.p
           variants={slideFromRight}
-          className="text-[16px] text-[#ABB2BF] font-medium w-full md:w-5/12"
+          className="text-[16px] text-[var(--muted)] font-medium w-full md:w-5/12"
         >
           I’m interested in freelance opportunities. However, if you have other
           request or question, don’t hesitate to contact me
         </motion.p>
         <motion.div
           variants={slideFromBottom}
-          className="flex gap-2 flex-col border border-[#ABB2BF] text-[#ABB2BF] p-5"
+          className="flex gap-2 flex-col border border-[var(--muted)] text-[var(--muted)] p-5"
         >
-          <h2 className="font-semibold text-white text-center pb-3">
+          <h2 className="font-semibold text-[var(--fg)] text-center pb-3">
             Message me here
           </h2>
           <h3 className="flex gap-3">

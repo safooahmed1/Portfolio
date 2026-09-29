@@ -5,7 +5,7 @@ import { useAnimationStore } from "../../../store/indexAnimation";
 export default function Footer() {
   const { containerVariants, slideFromBottom } = useAnimationStore();
   return (
-    <div className="border-t border-[#ABB2BF] max-sm:pb-10">
+    <div className="border-t border-[var(--muted)] max-sm:pb-10">
       <motion.div
         variants={containerVariants}
         whileInView="visible"
@@ -16,7 +16,7 @@ export default function Footer() {
         <TopFooter />
         <motion.div
           variants={slideFromBottom}
-          className="text-center text-[#ABB2BF]"
+          className="text-center text-[var(--muted)]"
         >
           © Copyright 2025. Design by Elias <br />
           Made by Safoo
