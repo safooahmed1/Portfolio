@@ -166,17 +166,58 @@ Dev server stopped afterwards; no stray process left running.
 
 Masked from lint by `varsIgnorePattern: '^[A-Z_]'` — the imports are never used.
 
-- [ ] `src/main.jsx:3` — drop `BrowserRouter`, `Router` (the whole `react-router-dom` import)
-- [ ] `src/pages/AboutmePage.jsx:3` — drop the unused `MySkills` import
-- [ ] `layout/headre/Header.jsx:2` — drop the unused `Swap` import
-- [ ] `store/index.jsx:146-149` — delete the dead `usdLoader` store
-- [ ] `workPage/Projects.jsx:6` — delete the unused `tittle2`
-- [ ] `LayoutScreen/Square1.jsx:6` — drop the unused `slideFromLeft`
-- [ ] `LayoutScreen/Square2.jsx:6` — drop the unused `slideFromRight`
+- [x] `src/main.jsx:3` — drop `BrowserRouter`, `Router` (the whole `react-router-dom` import)
+- [x] `src/pages/AboutmePage.jsx:3` — drop the unused `MySkills` import
+- [x] `layout/headre/Header.jsx:2` — drop the unused `Swap` import
+- [x] `store/index.jsx:146-149` — delete the dead `usdLoader` store
+- [x] `workPage/Projects.jsx:6` — delete the unused `tittle2`
+- [x] `LayoutScreen/Square1.jsx:6` — drop the unused `slideFromLeft`
+- [x] `LayoutScreen/Square2.jsx:6` — drop the unused `slideFromRight`
 
-**Verify:** `npm run lint` → **0 errors** ✅ · `npm run build` ✅ · home, projects,
-about-me, contacts, and a bad URL all still render
-**Note:**
+**Verify:** `npx eslint .` → **0 errors**, exit code 0 ✅ · `npm run build` ✅ 9.00s ✅ ·
+live browser check of all four routes plus a bad URL ✅
+**Note (2026-09-29):** Verified in a real browser against `npm run dev`.
+**Lint is now completely clean for the first time on this repo.**
+
+- Every removal was confirmed dead by grepping `src/` for each symbol before
+  deleting it, not by trusting the lint message alone:
+  - `usdLoader` appeared in exactly one place, its own definition. Nothing imports it.
+  - `MySkills` is still imported and rendered twice, by `SkillsComponant.jsx` and
+    by the home page's `Skills.jsx` — only `AboutmePage.jsx`'s copy was dead, so
+    `/about-me` still shows the skills list (verified: `#skills` heading,
+    Languages/Tools/Frameworks, and `JavaScript` all still on the page).
+  - `Swap` is still imported and rendered by `NavbarXl.jsx`; only `Header.jsx`'s
+    import was dead. The theme toggle still works.
+  - `BrowserRouter` is still imported and used in `App.jsx`, where the router
+    actually belongs. `main.jsx` only renders `<App />`.
+  - `tittle2` had no consumer at all; `TitleComponent` only accepts `tittle1`,
+    so `"small-projects"` was never displayed.
+- Per-route render check, with broken-image counts:
+  | route | title | h2 | images | broken | header+footer | nav links |
+  |---|---|---|---|---|---|---|
+  | `/` | Front-End Developer | 9 | 27 | 0 | yes | 8 |
+  | `/projects` | Projects | 13 | 24 | 0 | yes | 8 |
+  | `/about-me` | About Me | 2 | 16 | 0 | yes | 8 |
+  | `/contacts` | Contact | 1 | 14 | 0 | yes | 8 |
+  | `/nope-does-not-exist` | Page Not Found | 0 | 7 | 0 | no (by design) | 0 |
+  The 404 still correctly sits outside `Layout`, so it has no header or footer.
+- The `Square1`/`Square2` change was the only one with real animation risk, since
+  it touches a motion store destructuring. Rather than just eyeballing the settled
+  state (which is `transform: none` whether or not the animation runs), I sampled
+  `getComputedStyle` every 60ms from page load. Measured, in order:
+  - `Square1` (right side) starts at `translateX(50px)` and eases to 0 —
+    that is `slideFromRight`, the one it actually uses.
+  - `Square2` (left side) starts at `translateX(-50px)` and eases to 0 —
+    that is `slideFromLeft`, the one it actually uses.
+  - Opacity goes 0 → 1 on both, over the 0.6s the store defines.
+  So each square kept its own animation and the dropped key really was unused.
+  Note the two files were cross-wired relative to their names: `Square1` (the
+  one on the right) is the one that slides from the right.
+- No console errors or warnings on any route.
+- Diff is 13 deletions and 2 insertions (the two shortened destructuring lines),
+  7 files, no behaviour change intended anywhere.
+
+Dev server stopped afterwards; no stray process left running.
 
 ---
 

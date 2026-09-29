@@ -1,6 +1,5 @@
 import AboutMePageComponant from "../components/aboutMePage/AboutMePageComponant";
 import SkillsComponant from "../components/aboutMePage/SkillsComponant";
-import MySkills from "../components/homePage/skills/MySkills";
 import TitlePage from "../components/krkba/TitlePage";
 
 export default function AboutmePage() {

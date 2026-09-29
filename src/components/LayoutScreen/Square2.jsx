@@ -3,8 +3,7 @@ import { motion } from "motion/react";
 import { useAnimationStore } from "../../store/indexAnimation";
 
 export default function Square2() {
-  const { containerVariants, slideFromRight, slideFromLeft } =
-    useAnimationStore();
+  const { containerVariants, slideFromLeft } = useAnimationStore();
   return (
     <>
       <div className="fixed top-100 left-[-30px]">

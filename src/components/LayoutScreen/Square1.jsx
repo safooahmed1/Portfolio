@@ -3,8 +3,7 @@ import { motion } from "motion/react";
 import { useAnimationStore } from "../../store/indexAnimation";
 
 export default function Square1() {
-  const { containerVariants, slideFromRight, slideFromLeft } =
-    useAnimationStore();
+  const { containerVariants, slideFromRight } = useAnimationStore();
   return (
     <div className="fixed top-50 right-[-20px] ">
       <motion.div

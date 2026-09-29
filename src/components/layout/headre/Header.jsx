@@ -1,5 +1,4 @@
 //import local
-import Swap from "./Swap";
 import NavbarXl from "./NavbarXl.jsx";
 import NavbarSm from "./NavbarSm.jsx";
 //react icone
