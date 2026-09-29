@@ -298,16 +298,68 @@ Dev server stopped afterwards; no stray process left running.
 
 ## Task 7 — `chore: drop unused dependencies and assets`
 
-- [ ] Remove `react-intersection-observer` (never imported)
-- [ ] Remove `styled-components` (only used by the dead `krkba/Loader.jsx`)
-- [ ] Remove `autoprefixer` and `postcss` (Tailwind v4 is CSS-first via the Vite plugin)
-- [ ] Delete `krkba/Loader.jsx` (never imported)
-- [ ] Delete `src/assets/logo/logo.png` and `src/assets/projcts/pro11.png` (unreferenced)
+- [x] Remove `react-intersection-observer` (never imported)
+- [x] Remove `styled-components` (only used by the dead `krkba/Loader.jsx`)
+- [x] Remove `autoprefixer` and `postcss` (Tailwind v4 is CSS-first via the Vite plugin)
+- [x] Delete `krkba/Loader.jsx` (never imported)
+- [x] Delete `src/assets/logo/logo.png` and `src/assets/projcts/pro11.png` (unreferenced)
 
-**Verify:** `npm run lint` → 0 ✅ · `npm run build` ✅ (this is the one that proves
-Tailwind still compiles without `postcss.config.js`) · `npm run dev`, load the site,
-confirm `bg-[#282C33]` and the `dock` bottom nav still render
-**Note:**
+**Verify:** `npx eslint .` → 0, exit 0 ✅ · `npm run build` ✅ 6.04s ✅ ·
+live browser check that Tailwind still compiles and daisyUI still works ✅
+**Note (2026-09-29):** This is the task that actually proves Tailwind is
+CSS-first, so it got checked harder than the others.
+
+- All four packages were removed with a single `npm uninstall`, so
+  `package.json` and `package-lock.json` move together and cannot drift.
+  `package.json` drops exactly 4 entries; the lock loses 209 lines.
+- `styled-components` was the only reason `Loader.jsx` existed, and `Loader` was
+  imported by nothing, so the two deletions are one change: the 249-line file was
+  the sole consumer of the dependency. Nothing was lost by deleting it.
+- **`postcss` is still in `node_modules` and that is correct, not a miss.** Vite
+  declares `postcss: ^8.5.6` as a runtime dependency of its own, so npm keeps it
+  installed transitively. What this task removed is the *direct* `devDependencies`
+  entry, which is the part that was misleading — it implied the project configured
+  PostCSS when no `postcss.config.js` has ever existed. Verified in the lock:
+  `node_modules/postcss` has no `dev` flag and is required by `node_modules/vite`.
+- `autoprefixer` is now fully gone from disk. It was dead weight for the same
+  reason: with no `postcss.config.js` and Tailwind v4 going through the Vite
+  plugin, there was nothing for it to hook into.
+- Confirmed there is no `postcss.config.js` or `tailwind.config.js` anywhere, and
+  `index.css` still only does `@import "tailwindcss"; @plugin "daisyui";`.
+
+**Tailwind/daisyUI still work — measured on the built CSS and the live DOM:**
+
+- Built CSS still contains the arbitrary-value utilities the design system is
+  built on: `.bg-\[\#282C33\]{background-color:#282c33}`,
+  `.text-\[\#C778DD\]`, `.text-\[\#ABB2BF\]`, `.border-\[\#ABB2BF\]`, plus
+  `.text-white`, `.object-contain` and the daisyUI `.dock` / `.swap` rules.
+- Computed styles on the live site: `html` background `rgb(40, 44, 51)` (#282C33),
+  the hardcoded `bg-[#282C33]` navbar the same colour, accent `#C778DD` =
+  `rgb(199, 120, 221)`, muted `#ABB2BF` = `rgb(171, 178, 191)` on both the card
+  borders and the footer rule. `--color-white` still resolves to `#fff`, so the
+  Tailwind theme loaded rather than silently degrading.
+- daisyUI checked at a 390px viewport, where the bottom dock replaces the top nav:
+  `.dock` is `display: flex`, visible, background `rgb(40, 44, 51)`, with all four
+  links present and `dock-active` correctly on Home. The top nav is `display: none`
+  at that width, so the responsive switch still works.
+- The theme toggle still renders: `.swap` present with its checkbox input.
+
+**Nothing broke on the way:**
+
+- All five routes still render with their own titles, the header/footer are intact
+  on the four real pages, and there are **0 broken images** everywhere.
+- The dev-server request log was checked for the deleted files: 114 requests, and
+  none for `logo.png`, `pro11.png`, `Loader.jsx` or any `styled-components` chunk.
+  This is the real proof the deletions were safe, rather than assuming no import
+  means no use.
+- `node_modules` confirms `react-intersection-observer`, `styled-components` and
+  `autoprefixer` are actually gone from disk, not just from `package.json`.
+- No console errors or warnings.
+
+Net: 456 deletions against 6 insertions, 5 files. The build output is unchanged in
+size (383.11 kB JS / 125.59 kB gzip, identical to the Task 6 build).
+
+Dev server stopped afterwards; no stray process left running.
 
 ---
 
