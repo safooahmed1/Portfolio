@@ -94,12 +94,30 @@ Dev server stopped afterwards; no stray process left running.
 
 ## Task 3 — `fix(Box): remove undefined img reference`
 
-- [ ] `homePage/projctsLine/Box.jsx:19` — `src={el.img || img}` → `src={el.img}`
+- [x] `homePage/projctsLine/Box.jsx:19` — `src={el.img || img}` → `src={el.img}`
       (`img` is never defined; survives only because every store entry sets `img`)
 
-**Verify:** `npm run lint` → 5 errors · `npm run build` ✅ · `/projects` renders
-all 12 project images · a project with no `img` must not throw
-**Note:**
+**Verify:** `npx eslint .` → 5 problems ✅ · `npm run build` ✅ 6.79s ✅ ·
+live browser check on `/projects` ✅
+**Note (2026-09-29):** Verified in a real browser against `npm run dev`.
+
+- `img` was never declared in `Box.jsx`, so `el.img || img` only avoided a
+  `ReferenceError` because every one of the 16 store entries sets `img`. The
+  right operand was dead code, not a fallback.
+- After the change `/projects` still renders all 12 project cards, all 12 images
+  report `complete && naturalWidth > 0` (no broken image icons), and the 12 other
+  images on the page (logo, social icons, decorations) are untouched.
+- The "no `img` must not throw" case was tested for real: I temporarily added a
+  `{ name: "TEMP_NO_IMG" }` entry with no `img` to `projcts` in the store, reloaded,
+  and confirmed the card renders with a plain `<img>` carrying no `src`, the rest of
+  the page stays alive, and the console stays clean. The temp entry was then
+  reverted — `git diff` shows `Box.jsx` as the only modified file.
+- Note the scope: `Box` is shared, and `BoxProject.jsx` imports it from
+  `workPage/`, so this single edit fixes both `/projects` (12 cards) and the home
+  page short list (4 cards).
+- Lint went 6 → 5, which is this task's `no-undef` and nothing else.
+
+Dev server stopped afterwards; no stray process left running.
 
 ---
 

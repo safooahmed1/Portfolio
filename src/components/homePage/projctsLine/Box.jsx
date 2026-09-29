@@ -16,7 +16,7 @@ export default function Box({ el }) {
       >
         <div className="border-b border-[#ABB2BF] w-full h-73 md:h-75 overflow-hidden">
           <img
-            src={el.img || img}
+            src={el.img}
             className="w-full h-auto object-contain transition-transform duration-300 hover:scale-110"
           />
         </div>
