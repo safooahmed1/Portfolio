@@ -42,16 +42,25 @@ The 30 `motion` errors are **false positives**: every one of those files does us
 `eslint-plugin-react`. Deleting the imports would break every page. Fix the
 *rule*, never the imports.
 
-- [ ] `npm i -D eslint-plugin-react`
-- [ ] Add `react/jsx-uses-vars` + `react/jsx-uses-react` to `eslint.config.js`
-- [ ] Add the `react` plugin to the `extends` list
+- [x] `npm i -D eslint-plugin-react` → installed `7.37.5`
+- [x] `eslint.config.js` — import the plugin, register it in `plugins: { react }`,
+      enable `react/jsx-uses-vars`
+- [x] No `motion` import was deleted anywhere in this task
 
-**Verify:** `npm run lint` → **6 errors** (was 36) · `npm run build` ✅
-**Expected remaining 6:** `Box.jsx:19` `no-undef`, `NavbarXl:16` `index`,
+**Verify:** `npx eslint .` → **6 errors** (was 36) ✅ · `npm run build` ✅ 4.95s
+**Remaining 6, all real:** `Box.jsx:19` `no-undef`, `NavbarXl:16` `index`,
 `Square1:6` `slideFromLeft`, `Square2:6` `slideFromRight`,
 `Projects.jsx:6` `tittle2`, `store/index.jsx:146` `set`
 
-**Note:**
+**Note (2026-09-29):** Lint went 36 → 6, exactly as predicted, and the 6 left are
+the genuine ones. Build still passes (4.95s). Confirmed the fix is the rule and
+not the imports: the 30 previously-flagged files still contain `<motion.div>` etc.
+and no `motion` import was touched.
+
+Note on the config: `react/jsx-uses-react` was intentionally **not** added. It only
+marks a bare `React` identifier as used, and this codebase uses the automatic JSX
+runtime, so the rule has nothing to do and would be dead config. `jsx-uses-vars`
+is the rule that actually fixed the 30 errors.
 
 ---
 
