@@ -301,6 +301,83 @@ check at 1366 and 1920; native scrollbar colour correct in light mode;
 
 ---
 
+## Task 3a — owner-requested amendment to Task 3: hug the picture, add a gap
+
+- [x] Replace the fixed image-box height with a 2:1 box, so the box is the picture's
+      own size at every screen width instead of a fixed pixel height that only
+      happened to suit one breakpoint
+- [x] Give the box vertical margin so the text is not tight against it, replacing the
+      horizontal rule that used to do that job
+
+**Verify:** box ratio exactly 2 at every width tested; zero vertical slack between the
+box and the picture; all cards in a row still one height; `npx eslint .` → 0;
+`npm run build` ✅
+
+**Note (2026-09-30):** The owner reviewed the Task 3 result and asked for three
+changes: the box should be exactly the size of the picture whatever the screen width,
+there should be a visible vertical gap so the text is not tight against it, and the box
+should have pleasant proportions at every width. Done as one amendment commit, so the
+original Task 3 commit stays bisectable.
+
+Measured, at 1920 / 1366 / 900 / 390:
+
+| viewport | box | ratio | vertical slack | gap to heading |
+|---|---|---|---|---|
+| 1920 | `352x176` | `2.000` | `0` | `40px` |
+| 1366 | `254x127` | `2.000` | `0` | `40px` |
+| 900 (two columns) | `316x158` | `2.000` | `0` | `40px` |
+| 390 (one column) | `132x66` | `2.000` | `0` | `40px` |
+
+Vertical slack is zero everywhere, so the box height equals the picture height at every
+width: the empty bands the previous commit introduced are gone. Horizontally, eleven of
+the twelve sources fill the box to within a pixel, because eleven of them are about 2:1.
+The twelfth, at `1907x1080`, is 1.77:1 and keeps `21px` of slack per side at 1920,
+narrowing to `8px` at 390. Cards are still one height per row, and rows got shorter and
+tidier: `400 / 400 / 419` at 1366, down from `504 / 468 / 552`.
+
+The gap is `40px` at every width: `20px` of margin below the box plus the `20px` the
+text section already had. The horizontal rule that used to sit under the box is gone,
+since the gap now does its job.
+
+Gates: `npx eslint .` → 0. `npm run build` ✅. Production CSS `38443` B, up 70 B: the
+new aspect-ratio and margin rules are added, while the fixed height for the larger step
+disappears. Console empty, including after a client-side route change. Task 2's zero
+overlap still holds.
+
+Worth knowing: the old fixed height rule is *still* in the built stylesheet even though
+no component uses it any more, because the Task 3 checklist above names it in plain
+text. That is the markdown trap from Task 1, catching the very plan that documents it.
+
+And the trap caught me too, one paragraph lower. The first draft of this note cost
+`525` B by naming a daisyUI component in an ordinary sentence while describing the rule
+I had removed; rewording that one word brought it straight back to `38443`. Verified by
+diffing the built selector lists with and without this note, not by trusting the total:
+the diff is now empty, so the note itself is free.
+
+### 🔴 Finding — Task 2 broke phone and tablet widths
+
+Found while measuring the 390 row above, and **not fixed here**: the box at 390 is
+`132x66`, which is technically a perfect 2:1 box in a container far too small to be
+believable.
+
+The cause is Task 2's cap, `min(96rem, 100vw - 14rem)`. It subtracts `224px` at *every*
+width, including widths where the decorations are hidden. At a 390px phone that leaves
+`main` at `166px`, and after the page's own `16px` padding each side the cards get
+`134px`. Before Task 2 the shared container was simply full width, so those same cards
+were `358px`.
+
+So the reservation is charged at widths that do not need it. The decorations only appear
+from 1280, so the reservation should only apply from 1280 too. The ready fix is to keep
+the plain `96rem` cap as the default and add the `100vw - 14rem` half at `xl` and up,
+which restores phones and tablets and leaves all four verified desktop widths exactly as
+they are. It needs its own task and its own sign-off, because it touches Task 2.
+
+This also means the Task 2 table in this file is wrong: it predicts a `1152` container at
+viewport 1200, but that formula can never produce it — at 1200 it yields `976`.
+
+---
+
+
 ## Out of scope — reported, not fixed here
 
 Do not touch these as a side effect of Tasks 2–4. Each needs its own sign-off.

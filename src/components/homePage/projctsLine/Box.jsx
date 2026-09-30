@@ -14,7 +14,7 @@ export default function Box({ el }) {
         variants={slideFromBottom}
         className="border border-[var(--muted)] flex flex-col min-h-[400px] overflow-hidden"
       >
-        <div className="border-b border-[var(--muted)] w-full h-73 md:h-75 overflow-hidden">
+        <div className="w-full aspect-2/1 overflow-hidden my-5">
           <img
             src={el.img}
             alt={el.name}
