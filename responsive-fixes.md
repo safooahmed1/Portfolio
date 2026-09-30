@@ -232,19 +232,57 @@ Two notes for whoever picks up Task 3:
 
 ## Task 3 — `fix(boxes): equalize project cards and fix the image box`
 
-- [ ] Remove `justify-items-center-safe` from `BoxProject.jsx:12` and `BoxShortPro.jsx:12`
-- [ ] In `Box.jsx`, make the `<img>` `w-full h-full object-contain` inside the
+- [x] Remove `justify-items-center-safe` from `BoxProject.jsx:12` and `BoxShortPro.jsx:12`
+- [x] In `Box.jsx`, make the `<img>` `w-full h-full object-contain` inside the
       `h-73 md:h-75` wrapper so it fills the card width and letterboxes in a
       consistent box
-- [ ] Remove the `h-full` from the text section in `Box.jsx` so it stops claiming the
+- [x] Remove the `h-full` from the text section in `Box.jsx` so it stops claiming the
       card's full height
-- [ ] `<img>` tags still need `alt` — check the current text while in there
+- [x] `<img>` tags still need `alt` — check the current text while in there
 
 **Verify:** all card widths identical on `/` and `/projects`; card image rendered
 height ≈ `292px`, not `24px`; card heights equal across a row; `npx eslint .` → 0;
 `npm run build` ✅
 
-**Note:**
+**Note (2026-09-30):** All four done, all measured.
+
+Card widths are now identical everywhere measured: at 1920 all 12 are `354` on
+`/projects` and all 4 are `354` on `/`; at 1366 all 12 are `256` and all 4 are `256`;
+at 900, where the grid drops to two columns, all 12 are `318`. Before, at 1280, ten
+cards were 255 and two were 234.
+
+The wrapped picture now measures `299px` at every width instead of being squeezed to
+its natural height, and every card in a row has the same height: `504/504/504/504`,
+`468/468/468/468`, `552/552/552/552` at 1366, and `468/468/468/468` at 1920. Rows are
+not equal to *each other*, which is correct: the last four projects have one button
+instead of two, and the description text wraps differently per card width.
+
+`alt` needed no change. The cards already pass `alt={el.name}`, and the accessibility
+tree confirms it — the images read as "EWatch", "Coffee", "Portfolio" and so on.
+
+Gates: `npx eslint .` → 0. `npm run build` ✅. Production CSS `38373` B, down 20 B from
+`38393`. That is the old automatic-height rule disappearing: it was used in `Box.jsx`
+and in no other source file, and unlike the earlier traps this one is not named in any
+scanned markdown, so removing it really did remove it. Console empty, including after
+a client-side route change onto the grid.
+
+### Finding — the picture itself did not get bigger
+
+Worth a decision, and **not** acted on here. The plan expected a crushed 24px picture
+to be reclaimed, and expected that to dwarf the card change. Measured, it did not.
+
+At 4 columns the source images are about 2:1, so the 299px box holds a picture of only
+`176px` at 1920 and `127px` at 1366 — roughly 60px of empty space above and below each
+one. Task 2 already recorded `127` on `/projects` at 1366, so the *visible* picture is
+the same size as it was before this task; what actually changed is that the box is now
+a consistent 299px instead of collapsing to the picture's own height, and the cards are
+equal width.
+
+So the squash is genuinely gone and the two layout goals are met, but at four columns
+this buys a taller, airier card rather than a bigger picture. Three ways to change that,
+each needing its own sign-off: cover instead of contain, which fills all 299px and crops
+the sides; a shorter image box closer to 2:1, which removes the empty bands; or an
+explicit 2:1 aspect box, which letterboxes almost nothing but varies with card width.
 
 ---
 

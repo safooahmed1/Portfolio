@@ -18,11 +18,11 @@ export default function Box({ el }) {
           <img
             src={el.img}
             alt={el.name}
-            className="w-full h-auto object-contain transition-transform duration-300 hover:scale-110"
+            className="w-full h-full object-contain transition-transform duration-300 hover:scale-110"
           />
         </div>
         {/* contant */}
-        <div className="flex flex-col justify-around h-full py-5">
+        <div className="flex flex-col justify-around py-5">
           <h2 className=" text-[24px] font-medium px-5">{el.name}</h2>
           <p className="px-5 text-[var(--muted)] ">{el.dis}</p>
           {/* button */}

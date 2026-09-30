@@ -9,7 +9,7 @@ export default function BoxProject() {
   return (
     <>
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full justify-items-center-safe gap-10 "
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full gap-10 "
         whileInView="visible"
         variants={containerVariants}
         initial="hidden"
