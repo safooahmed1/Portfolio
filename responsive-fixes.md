@@ -103,10 +103,16 @@ Cap the container with `max-w-[min(96rem,calc(100vw-14rem))]`.
 at every width. Raise the decorations from `lg:flex` to `xl:flex` (1280px) — below
 that there is genuinely no room for them beside four columns.
 
+> **Corrected in Task 2b.** This cap is now applied at `xl` and up only, because the
+> `14rem` reservation is only needed where the decorations are actually drawn. Below
+> 1280 the container is full width and the page's own padding is the only gutter. The
+> predicted table below was also wrong: that formula yields `976` at viewport 1200, not
+> the `1152` written here. The measured column is the corrected one.
+
 | viewport | container | gutter | cards | overlap |
 |---|---|---|---|---|
-| 1200 | 1152 | 24 (no deco) | 290px | 0 |
-| 1366 | 1142 | 112 | 255px | 0 |
+| 1200 | ~~1152~~ **1185** | full width (no deco) | 266px | 0 |
+| 1366 | 1142 | 112 | 256px | 0 |
 | 1536 | 1312 | 112 | 298px | 0 |
 | 1600 | 1376 | 112 | 314px | 0 |
 | 1920 | **1536** | 192 | **354px** | 0 |
@@ -374,6 +380,53 @@ they are. It needs its own task and its own sign-off, because it touches Task 2.
 
 This also means the Task 2 table in this file is wrong: it predicts a `1152` container at
 viewport 1200, but that formula can never produce it — at 1200 it yields `976`.
+
+**Closed by Task 2b below.**
+
+---
+
+## Task 2b — `fix(layout): reserve the gutter only where the decorations are drawn`
+
+- [x] Move the whole cap behind `xl` in all three places: `Layout.jsx:10`,
+      `Header.jsx:20`, `Footer.jsx:14`, so below 1280 the container is full width and
+      the page's own padding is the only gutter
+- [x] Correct the wrong predicted container width in the Task 2 table above
+
+**Verify:** below 1280 the container is full width and the cards are as wide as the
+padding allows; 1280 / 1366 / 1440 / 1920 keep exactly the widths measured in Task 2,
+with overlap still 0; `npx eslint .` → 0; `npm run build` ✅
+
+**Note (2026-09-30):** The owner asked for exactly this: below the desktop breakpoint
+there should be no container, just simple padding, because the content is already large
+on a phone. The `14rem` reservation now only applies from 1280, which is where the
+decorations start being drawn.
+
+Below 1280, measured: at 390 `main` is `375` and cards are `343`, against `166` and
+`134` before this change — a 2.5x wider card on a phone. At 768 `main` is `753` and cards
+are `357`. At 1200 `main` is `1185`, full width, with zero decorations drawn and zero
+overlap. The image box is still a perfect `2.000` ratio with no vertical slack at 390,
+and the 40px gap above the text is unchanged.
+
+At and above 1280 nothing moves: `main` measures `1056` / `1142` / `1216` / `1536` at
+1280 / 1366 / 1440 / 1920, identical to Task 2, with cards `234` / `256` / `274` / `354`
+and overlap 0 at every one. Header row, footer row and the navigation row all sit at
+`1536` from `left 185` at 1920, so the three stay aligned, and at 390 there is no
+horizontal overflow on any route.
+
+Gates: `npx eslint .` → 0. `npm run build` ✅. Production CSS `38527` B, up 84 B for the
+prefixed rule inside the 80rem media query. Console empty, including after a client-side
+route change on a phone viewport.
+
+Two things found along the way, both left alone:
+
+- The *unprefixed* version of this rule is still in the built stylesheet even though no
+  component uses it any more, because Task 2's checklist above names it in plain text.
+  Same markdown trap as Task 3a, costing about 48 B.
+- `NavbarXl.jsx:10` puts `w-screen`, which is `100vw`, on a row *inside* the capped
+  container. It happens to be harmless today only because the row is a flex item and
+  shrinks to fit; at every width measured the row is exactly the container width and
+  nothing overflows. It is one `w-full` away from being a real bug, but it is not part of
+  this task.
 
 ---
 

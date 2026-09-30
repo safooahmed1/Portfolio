@@ -17,7 +17,7 @@ export default function Header() {
 
   return (
     <div className="">
-      <div className="lg:bg-[var(--surface)] w-full max-w-[min(96rem,calc(100vw-14rem))] mx-auto flex px-4 md:px-0 z-30">
+      <div className="lg:bg-[var(--surface)] w-full mx-auto xl:max-w-[min(96rem,calc(100vw-14rem))] flex px-4 md:px-0 z-30">
         {/* navbar */}
         <NavbarXl links={links} />
         <NavbarSm links={links} />
