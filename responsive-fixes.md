@@ -195,15 +195,38 @@ below and deliberately **not** done here.
 
 ## Task 2 — `fix(layout): guarantee a gutter so decorations never overlap`
 
-- [ ] Replace `container mx-auto` with `w-full max-w-[min(96rem,calc(100vw-14rem))] mx-auto`
+- [x] Replace `container mx-auto` with `w-full max-w-[min(96rem,calc(100vw-14rem))] mx-auto`
       in all three places: `Layout.jsx:10`, `Header.jsx:20`, `Footer.jsx:14`
-- [ ] `LayoutScreen.jsx:17`: `hidden lg:flex` → `hidden xl:flex`
+- [x] `LayoutScreen.jsx:17`: `hidden lg:flex` → `hidden xl:flex`
 
 **Verify:** overlap count `=== 0` at 1280 / 1366 / 1440 / 1920 on all five routes;
 `main` width still `1536` and card width still `354` at 1920; `npx eslint .` → 0;
 `npm run build` ✅
 
-**Note:**
+**Note (2026-09-30):** Both changes are in and measured in the browser.
+
+Overlap of decorations with content is **0** on all five routes at all four widths —
+20 measurements, all zero, against the 5-of-5 the audit recorded at 1366. `main` now
+measures 1056 / 1142 / 1216 / 1536 at 1280 / 1366 / 1440 / 1920, so the narrowest
+gutter is `105px`, just clear of the `104px` the decorations reach in from each edge.
+
+FHD is untouched: `main` `1536` and project card `354` at 1920, identical to the
+baseline in the audit table.
+
+Gates: `npx eslint .` → 0 errors. `npm run build` ✅. Production CSS `38393` B, which
+is baseline `38265` + the `128` B Task 1 predicted — and both new rules are confirmed
+present in the built stylesheet, so this is the real cost, not a stale build. Console
+empty, including after a client-side route change off the grid and back, which is the
+case the measuring notes above warn about.
+
+Two notes for whoever picks up Task 3:
+
+- Card widths are **still** unequal at 1280 on the grid — ten at 255px and two at
+  234px. Unequal cards and the crushed image box are Task 3's job, recorded here, not
+  fixed here.
+- The two places in `AGENTS.md` that said the decorations start at 1024 are now
+  corrected, since this change made them wrong. It costs no CSS: the older rule is
+  still genuinely needed by `MySkills.jsx:19`.
 
 ---
 

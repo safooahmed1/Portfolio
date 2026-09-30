@@ -11,7 +11,7 @@ export default function Footer() {
         whileInView="visible"
         initial="hidden"
         viewport={{ once: true, amount: 0.2 }}
-        className="container mx-auto flex flex-col gap-12 px-4 md:px-0 py-8"
+        className="w-full max-w-[min(96rem,calc(100vw-14rem))] mx-auto flex flex-col gap-12 px-4 md:px-0 py-8"
       >
         <TopFooter />
         <motion.div

@@ -14,7 +14,7 @@ export default function LayoutScreen() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="hidden lg:flex"
+        className="hidden xl:flex"
       >
         <Linkat />
         <Square1 />

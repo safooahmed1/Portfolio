@@ -52,7 +52,7 @@ One task, one confirmation, one wait. If a task breaks the build, run
 ## Architecture
 - Entry: `index.html` -> `src/main.jsx` -> `src/App.jsx`.
 - `App.jsx`: `BrowserRouter` + `<Seo/>` + `<LayoutScreen/>` (fixed desktop-only
-  decorations, `hidden lg:flex`), then routes. All pages nest under `Layout` at
+  decorations, `hidden xl:flex`), then routes. All pages nest under `Layout` at
   `/`: index -> `HomePage`, `projects` -> `WorkPage`, `about-me` -> `AboutmePage`,
   `contacts` -> `ContactPage`. `*` -> `Error404`, which sits *outside* `Layout`
   and therefore has no header/footer.
@@ -82,7 +82,7 @@ One task, one confirmation, one wait. If a task breaks the build, run
   silently falls back to monospace. Don't "fix" this as a side effect of a
   content change.
 - Responsive: `md` switches top nav (`NavbarXl`) <-> bottom dock (`NavbarSm`);
-  `lg` turns on the side decorations.
+  `xl` turns on the side decorations.
 - Keep the existing (misspelled) names when adding files in those folders:
   `headre/`, `Componant`, `Contant`, `projcts`, `useProjcts`. Match the codebase,
   don't "correct" it.
