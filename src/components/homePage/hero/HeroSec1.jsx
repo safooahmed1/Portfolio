@@ -43,7 +43,7 @@ export default function HeroSec1() {
             <span className="relative z-10">
               <Link
                 to={"/contacts"}
-                className="text-[var(--fg)] hover:text-white"
+                className="text-[var(--fg)] hover:text-white inline-flex items-center justify-center px-4 py-2"
               >
                 Contact me!!
               </Link>
