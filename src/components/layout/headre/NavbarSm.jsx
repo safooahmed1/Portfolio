@@ -5,7 +5,7 @@ export default function NavbarSm({ links }) {
   return (
     <>
       <div className="">
-        <nav className="md:hidden  bg-[var(--surface)] dock">
+        <nav className="md:hidden bg-(--surface) z-50 dock">
           {links.map((el) => {
             const isActive = location.pathname === el.path;
             return (
