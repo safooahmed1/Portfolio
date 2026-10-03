@@ -1,5 +1,4 @@
 import { Link, useLocation } from "react-router-dom";
-import Swap from "./Swap";
 
 export default function NavbarSm({ links }) {
   const location = useLocation();
@@ -24,9 +23,6 @@ export default function NavbarSm({ links }) {
               </Link>
             );
           })}
-          <div className="flex items-center justify-center px-2">
-            <Swap />
-          </div>
         </nav>
       </div>
     </>

@@ -13,7 +13,7 @@ export default function BoxProject() {
         whileInView="visible"
         variants={containerVariants}
         initial="hidden"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: "some" }}
       >
         {projcts.map((el, index) => {
           return <Box el={el} key={index} />;
