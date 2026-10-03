@@ -1,16 +1,16 @@
 import { create } from "zustand";
-import pic1 from "../assets/projcts/pro1.png";
-import pic2 from "../assets/projcts/pro2.png";
-import pic3 from "../assets/projcts/pro3.png";
-import pic4 from "../assets/projcts/pro4.png";
-import pic5 from "../assets/projcts/pro5.png";
-import pic6 from "../assets/projcts/pro6.png";
-import pic7 from "../assets/projcts/pro7.png";
-import pic8 from "../assets/projcts/pro8.png";
-import pic9 from "../assets/projcts/pro9.png";
-import pic11 from "../assets/projcts/watch.png";
-import picStander from "../assets/projcts/Pasted image.png";
-import Portfolio from "../assets/projcts/Portfolio.png";
+import pic1 from "../assets/projcts/pro1.webp";
+import pic2 from "../assets/projcts/pro2.webp";
+import pic3 from "../assets/projcts/pro3.webp";
+import pic4 from "../assets/projcts/pro4.webp";
+import pic5 from "../assets/projcts/pro5.webp";
+import pic6 from "../assets/projcts/pro6.webp";
+import pic7 from "../assets/projcts/pro7.webp";
+import pic8 from "../assets/projcts/pro8.webp";
+import pic9 from "../assets/projcts/pro9.webp";
+import pic11 from "../assets/projcts/watch.webp";
+import picStander from "../assets/projcts/Pasted image.webp";
+import Portfolio from "../assets/projcts/Portfolio.webp";
 
 export const useProjcts = create(() => ({
   shortProjcts: [
