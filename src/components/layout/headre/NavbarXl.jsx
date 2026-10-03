@@ -7,7 +7,7 @@ export default function NavbarXl({ links }) {
   const location = useLocation();
   return (
     <>
-      <div className="w-screen bg-[var(--surface)] pb-4 text-[var(--fg)] hidden md:flex flex-row justify-between md:pt-8">
+      <div className="w-full bg-[var(--surface)] pb-4 text-[var(--fg)] hidden md:flex flex-row justify-between md:pt-8">
         <div className="flex gap-2 h-5 items-center">
           <img src={logoF} alt="SAFOO" className="w-4 h-4" />
           <p className="font-bold text-[16px]">SAFOO</p>
