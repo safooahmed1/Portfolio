@@ -10,6 +10,7 @@
   --fg: #ffffff;
   --muted: #abb2bf;
   --accent: #c778dd;
+  color-scheme: dark;
 }
 
 [data-theme="light"] {
@@ -17,6 +18,7 @@
   --fg: #1c1b22;
   --muted: #5c6370;
   --accent: #7a3a96;
+  color-scheme: light;
 }
 
 body {

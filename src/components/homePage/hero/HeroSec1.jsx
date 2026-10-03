@@ -6,7 +6,7 @@ export default function HeroSec1() {
   const { slideFromLeft } = useAnimationStore();
   return (
     <>
-      <div className="flex flex-col gap-6 centered w-full">
+      <div className="flex flex-col gap-6 w-full">
         <motion.h1
           className="w-full font-semibold text-4xl lg:text-5xl md:leading-[65px]"
           variants={slideFromLeft}

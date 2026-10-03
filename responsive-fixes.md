@@ -294,16 +294,20 @@ explicit 2:1 aspect box, which letterboxes almost nothing but varies with card w
 
 ## Task 4 — `fix(hero): remove the dead classes and add color-scheme`
 
-- [ ] `HeroSec1.jsx:9`: remove `centered` (undefined in `index.css`)
-- [ ] `Hero.jsx:10`: remove the dead `md:grid-cols-2`
-- [ ] Add a `color-scheme` declaration per theme so native scrollbars and form
+- [x] `HeroSec1.jsx:9`: remove `centered` (undefined in `index.css`)
+- [x] `Hero.jsx:10`: remove the dead `md:grid-cols-2`
+- [x] Add a `color-scheme` declaration per theme so native scrollbars and form
       controls match light mode
 
 **Verify:** Hero still lays out as two columns at ≥768px and stacks below; visual
 check at 1366 and 1920; native scrollbar colour correct in light mode;
 `npx eslint .` → 0; `npm run build` ✅
 
-**Note:**
+**Note (2026-10-03):**
+- Removed the dead `centered` token from `HeroSec1.jsx`.
+- Removed `md:grid-cols-2` from `Hero.jsx` (container is a flex layout).
+- Added `color-scheme: dark;` to `:root` and `color-scheme: light;` to `[data-theme="light"]` in `src/index.css`.
+- Gates: `npx eslint .` → 0 errors, `npm run build` ✅ (6.48s). Hero layout remains two columns on desktop and stacks on mobile.
 
 ---
 

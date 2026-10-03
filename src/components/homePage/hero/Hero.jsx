@@ -7,7 +7,7 @@ export default function Hero() {
   const { containerVariants } = useAnimationStore();
   return (
     <motion.div
-      className="flex flex-col md:flex-row md:grid-cols-2 mt-10 items-center"
+      className="flex flex-col md:flex-row mt-10 items-center"
       variants={containerVariants}
       whileInView="visible"
       initial="hidden"
