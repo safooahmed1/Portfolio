@@ -22,8 +22,8 @@ export default function App() {
               {/* <Route path="project:/" */}
             </Route>
             <Route path="contacts" element={<ContactPage />} />
+            <Route path="*" element={<Error404 />} />
           </Route>
-          <Route path="*" element={<Error404 />} />
         </Routes>
       </BrowserRouter>
     </div>
