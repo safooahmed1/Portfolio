@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@source not "../*.md";
 
 @theme {
   --font-mono: "Fira Code", monospace;
