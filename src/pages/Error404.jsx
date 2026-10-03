@@ -9,7 +9,7 @@ export default function Error404() {
         variants={containerVariants}
         animate="visible"
         initial="hidden"
-        className="text-[var(--muted)] text-5xl h-screen w-full flex justify-center items-center"
+        className="text-[var(--muted)] text-5xl h-full w-full flex justify-center items-center"
       >
         <motion.h1 variants={zoomIn}>404 | NOT FOUND</motion.h1>
       </motion.div>
